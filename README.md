@@ -2,7 +2,7 @@
 
 > **व्यापार नहीं, व्यवहार परोसते हैं हम।** — *We don't serve business, we serve relationships.*
 
-Ghar jaisa tiffin service for factories, companies and workers in industrial areas.
+Ghar jaisa tiffin service for factories, companies and workers in **Ahmedabad's industrial areas** — Odhav, Kathwada, Naroda, Vatva GIDC, Narol, Changodar.
 **₹60 daily thali · ₹1,599 monthly plan** — 4 tawa roti, rice, dal fry, mix veg / paneer sabji, salad.
 
 This repo is the full website + admin system:
@@ -20,7 +20,7 @@ This repo is the full website + admin system:
 
 **Tech:** Next.js 14 (App Router) · Tailwind CSS · Prisma 7 + PostgreSQL · NextAuth · Razorpay · WhatsApp Cloud API · PWA.
 
-Branding, 90-day campaign roadmap and ready marketing text: [`docs/BRANDING_ROADMAP_HINDI_ENGLISH.md`](docs/BRANDING_ROADMAP_HINDI_ENGLISH.md) · AI photo prompts: [`docs/AI_IMAGE_PROMPTS.md`](docs/AI_IMAGE_PROMPTS.md)
+Branding, 90-day campaign roadmap and ready marketing text: [`docs/BRANDING_ROADMAP_HINDI_ENGLISH.md`](docs/BRANDING_ROADMAP_HINDI_ENGLISH.md) · AI photo prompts: [`docs/AI_IMAGE_PROMPTS.md`](docs/AI_IMAGE_PROMPTS.md) · Ahmedabad launch plan: [`docs/AHMEDABAD_LAUNCH_PLAN.md`](docs/AHMEDABAD_LAUNCH_PLAN.md)
 
 ---
 
@@ -55,7 +55,7 @@ Admin login = `ADMIN_USERNAME` / `ADMIN_PASSWORD` from `.env` (password must be 
    `npx prisma migrate deploy && npm run db:seed`
 4. Razorpay → Settings → **Webhooks** → `https://YOUR-DOMAIN/api/razorpay/webhook`, events `payment.captured`, `order.paid`, `payment.failed`, secret = `RAZORPAY_WEBHOOK_SECRET`.
 5. Open `/admin/settings` → set real phone, WhatsApp number, kitchen address, FSSAI number, prices.
-6. Open `/admin/routes` → rename the sample industrial areas to your real ones (each gets an SEO page `/tiffin-service/<area>`).
+6. Open `/admin/routes` → Ahmedabad areas are pre-loaded (East cluster Odhav–Kathwada–Naroda + Vatva, Narol active; Aslali, Changodar, Moraiya, Sanand off). Switch areas on as you expand — each active area gets an SEO page `/tiffin-service/<area>`.
 7. Submit `https://YOUR-DOMAIN/sitemap.xml` in Google Search Console and create a Google Business Profile ("Tiffin service").
 
 ## Payments

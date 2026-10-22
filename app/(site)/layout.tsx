@@ -22,7 +22,8 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
     url: SITE_URL,
     telephone: s.businessPhone,
     image: `${SITE_URL}/og.png`,
-    address: { "@type": "PostalAddress", streetAddress: s.kitchenAddress, addressLocality: s.city, addressCountry: "IN" },
+    address: { "@type": "PostalAddress", streetAddress: s.kitchenAddress, addressLocality: s.city, addressRegion: "Gujarat", addressCountry: "IN" },
+    areaServed: ["Odhav GIDC", "Kathwada GIDC", "Naroda GIDC", "Vatva GIDC", "Narol", "Changodar", "Ahmedabad"],
     hasMenu: `${SITE_URL}/menu`,
     makesOffer: [
       { "@type": "Offer", name: "Daily Veg Thali Tiffin", price: p.daily, priceCurrency: "INR" },

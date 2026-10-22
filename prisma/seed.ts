@@ -10,11 +10,21 @@ import { addDays, endAfterWorkingDays, todayDb, weekday } from "../lib/dates";
 
 const db = new PrismaClient({ adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL }) });
 
-// Edit these to your real industrial areas (or do it later from /admin/routes)
+// Ahmedabad industrial areas, grouped in delivery clusters (route order = cluster order).
+// Start with ONE cluster (east: Odhav–Kathwada–Naroda) and switch the others on from /admin/routes when you expand.
 const AREAS = [
-  { slug: "industrial-area-phase-1", nameEn: "Industrial Area Phase 1", nameHi: "औद्योगिक क्षेत्र फेज़ 1", routeSeq: 1 },
-  { slug: "industrial-area-phase-2", nameEn: "Industrial Area Phase 2", nameHi: "औद्योगिक क्षेत्र फेज़ 2", routeSeq: 2 },
-  { slug: "transport-nagar", nameEn: "Transport Nagar", nameHi: "ट्रांसपोर्ट नगर", routeSeq: 3 },
+  // East cluster
+  { slug: "odhav-gidc-ahmedabad", nameEn: "Odhav GIDC", nameHi: "ओढव जीआईडीसी", city: "Ahmedabad", routeSeq: 1, active: true },
+  { slug: "kathwada-gidc-ahmedabad", nameEn: "Kathwada GIDC", nameHi: "कठवाड़ा जीआईडीसी", city: "Ahmedabad", routeSeq: 2, active: true },
+  { slug: "naroda-gidc-ahmedabad", nameEn: "Naroda GIDC", nameHi: "नरोडा जीआईडीसी", city: "Ahmedabad", routeSeq: 3, active: true },
+  // South cluster
+  { slug: "vatva-gidc-ahmedabad", nameEn: "Vatva GIDC", nameHi: "वटवा जीआईडीसी", city: "Ahmedabad", routeSeq: 4, active: true },
+  { slug: "narol-ahmedabad", nameEn: "Narol Industrial Area", nameHi: "नारोल औद्योगिक क्षेत्र", city: "Ahmedabad", routeSeq: 5, active: true },
+  { slug: "aslali-ahmedabad", nameEn: "Aslali", nameHi: "असलाली", city: "Ahmedabad", routeSeq: 6, active: false },
+  // West cluster (Sarkhej–Bavla highway)
+  { slug: "changodar-ahmedabad", nameEn: "Changodar Industrial Estate", nameHi: "चांगोदर इंडस्ट्रियल एस्टेट", city: "Ahmedabad", routeSeq: 7, active: false },
+  { slug: "moraiya-ahmedabad", nameEn: "Moraiya", nameHi: "मोरैया", city: "Ahmedabad", routeSeq: 8, active: false },
+  { slug: "sanand-gidc-ahmedabad", nameEn: "Sanand GIDC", nameHi: "साणंद जीआईडीसी", city: "Ahmedabad", routeSeq: 9, active: false },
 ];
 
 // Approximate 2026 rates — update from /admin/inventory when you buy.
