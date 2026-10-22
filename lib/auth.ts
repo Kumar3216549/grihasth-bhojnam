@@ -3,6 +3,7 @@ import type { NextAuthOptions } from "next-auth";
 import { getServerSession } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { redirect } from "next/navigation";
+import { AUTH_SECRET } from "./authSecret";
 
 function safeEqual(a: string, b: string) {
   const x = crypto.createHash("sha256").update(a).digest();
@@ -11,6 +12,7 @@ function safeEqual(a: string, b: string) {
 }
 
 export const authOptions: NextAuthOptions = {
+  secret: AUTH_SECRET,
   session: { strategy: "jwt", maxAge: 60 * 60 * 24 * 30 },
   pages: { signIn: "/admin/login" },
   providers: [

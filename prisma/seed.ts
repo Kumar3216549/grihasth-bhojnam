@@ -43,9 +43,16 @@ const ITEMS = [
 ];
 
 async function base() {
-  for (const a of AREAS) await db.area.upsert({ where: { slug: a.slug }, create: a, update: {} });
-  for (const it of ITEMS) await db.inventoryItem.upsert({ where: { key: it.key }, create: it, update: {} });
-  console.log(`✓ ${AREAS.length} areas, ${ITEMS.length} inventory items`);
+  // Runs on every Vercel build: only fills an EMPTY database, never overwrites what the owner changed in /admin.
+  if ((await db.area.count()) === 0) {
+    for (const a of AREAS) await db.area.upsert({ where: { slug: a.slug }, create: a, update: {} });
+    console.log(`✓ ${AREAS.length} areas`);
+  }
+  if ((await db.inventoryItem.count()) === 0) {
+    for (const it of ITEMS) await db.inventoryItem.upsert({ where: { key: it.key }, create: it, update: {} });
+    console.log(`✓ ${ITEMS.length} inventory items`);
+  }
+  console.log("✓ seed done");
 }
 
 async function demo() {
