@@ -1,0 +1,228 @@
+// Grihasth Bhojnam by Sachin — database schema
+// Run: npx prisma migrate dev --name init   (first time)
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum PlanType {
+  DAILY
+  MONTHLY
+}
+
+enum ThaliType {
+  VEG
+  PANEER
+}
+
+enum PaymentMethod {
+  COD
+  ONLINE
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+  REFUNDED
+}
+
+enum OrderStatus {
+  NEW
+  CONFIRMED
+  PREPARING
+  OUT_FOR_DELIVERY
+  DELIVERED
+  CANCELLED
+}
+
+enum SubStatus {
+  PENDING_PAYMENT
+  ACTIVE
+  PAUSED
+  EXPIRED
+  CANCELLED
+}
+
+enum StockTxnType {
+  IN
+  OUT
+  ADJUST
+}
+
+/// Key/value business settings editable from /admin/settings (prices, phone, UPI...)
+model Setting {
+  key       String   @id
+  value     String
+  updatedAt DateTime @updatedAt
+}
+
+/// Industrial area / delivery zone, e.g. "MIDC Phase 1"
+model Area {
+  id        String    @id @default(cuid())
+  slug      String    @unique
+  nameEn    String
+  nameHi    String
+  city      String    @default("")
+  routeSeq  Int       @default(0)
+  active    Boolean   @default(true)
+  companies Company[]
+  orders    Order[]
+  createdAt DateTime  @default(now())
+}
+
+/// Factory / company where tiffins are delivered (one delivery stop)
+model Company {
+  id            String         @id @default(cuid())
+  name          String
+  areaId        String?
+  area          Area?          @relation(fields: [areaId], references: [id])
+  address       String         @default("")
+  gateNote      String         @default("")
+  contactName   String         @default("")
+  contactPhone  String         @default("")
+  mapsUrl       String         @default("")
+  routeSeq      Int            @default(0)
+  orders        Order[]
+  subscriptions Subscription[]
+  customers     Customer[]
+  createdAt     DateTime       @default(now())
+
+  @@unique([name, areaId])
+}
+
+model Customer {
+  id            String         @id @default(cuid())
+  name          String
+  phone         String         @unique
+  companyId     String?
+  company       Company?       @relation(fields: [companyId], references: [id])
+  address       String         @default("")
+  orders        Order[]
+  subscriptions Subscription[]
+  createdAt     DateTime       @default(now())
+}
+
+model Order {
+  id                String         @id @default(cuid())
+  orderNo           String         @unique
+  publicToken       String         @unique @default(cuid())
+  customerId        String
+  customer          Customer       @relation(fields: [customerId], references: [id])
+  companyId         String?
+  company           Company?       @relation(fields: [companyId], references: [id])
+  areaId            String?
+  area              Area?          @relation(fields: [areaId], references: [id])
+  // snapshot of what the customer typed (kept even if company is renamed)
+  customerName      String
+  phone             String
+  companyName       String
+  areaName          String
+  address           String         @default("")
+  shift             String
+  planType          PlanType
+  thaliType         ThaliType      @default(VEG)
+  qty               Int            @default(1)
+  unitPrice         Int
+  amount            Int
+  deliveryDate      DateTime       @db.Date
+  paymentMethod     PaymentMethod
+  paymentStatus     PaymentStatus  @default(PENDING)
+  status            OrderStatus    @default(NEW)
+  razorpayOrderId   String?        @unique
+  razorpayPaymentId String?
+  notes             String         @default("")
+  whatsappSent      Boolean        @default(false)
+  invoice           Invoice?
+  subscription      Subscription?
+  createdAt         DateTime       @default(now())
+  updatedAt         DateTime       @updatedAt
+
+  @@index([deliveryDate])
+  @@index([status])
+}
+
+/// Monthly plan. A subscription delivers `qty` tiffins every working day between startDate and endDate.
+model Subscription {
+  id         String     @id @default(cuid())
+  customerId String
+  customer   Customer   @relation(fields: [customerId], references: [id])
+  companyId  String?
+  company    Company?   @relation(fields: [companyId], references: [id])
+  orderId    String?    @unique
+  order      Order?     @relation(fields: [orderId], references: [id])
+  qty        Int        @default(1)
+  shift      String
+  startDate  DateTime   @db.Date
+  endDate    DateTime   @db.Date
+  amount     Int
+  status     SubStatus  @default(PENDING_PAYMENT)
+  remindedAt DateTime?
+  createdAt  DateTime   @default(now())
+
+  @@index([status, endDate])
+}
+
+model Invoice {
+  id       String   @id @default(cuid())
+  number   String   @unique
+  orderId  String   @unique
+  order    Order    @relation(fields: [orderId], references: [id])
+  amount   Int
+  issuedAt DateTime @default(now())
+}
+
+/// Raw material: Atta, Rice, Dal, Sabji, Oil, Paneer, Gas...
+model InventoryItem {
+  id            String     @id @default(cuid())
+  key           String     @unique
+  nameEn        String
+  nameHi        String
+  unit          String
+  stock         Float      @default(0)
+  lowStockLevel Float      @default(0)
+  costPerUnit   Float      @default(0)
+  /// how much of this item one VEG tiffin uses (e.g. atta 0.12 kg for 4 roti)
+  perVegTiffin    Float    @default(0)
+  /// how much of this item one PANEER tiffin uses
+  perPaneerTiffin Float    @default(0)
+  txns          StockTxn[]
+  createdAt     DateTime   @default(now())
+}
+
+model StockTxn {
+  id        String        @id @default(cuid())
+  itemId    String
+  item      InventoryItem @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  type      StockTxnType
+  qty       Float
+  rate      Float         @default(0)
+  note      String        @default("")
+  date      DateTime      @default(now())
+}
+
+model Expense {
+  id        String   @id @default(cuid())
+  date      DateTime @db.Date
+  category  String
+  amount    Int
+  note      String   @default("")
+  createdAt DateTime @default(now())
+
+  @@index([date])
+}
+
+/// Today's sabji. If no row exists for a date, the weekly rotation in lib/menu.ts is used.
+model DailyMenu {
+  date      DateTime @id @db.Date
+  sabjiEn   String
+  sabjiHi   String
+  isPaneer  Boolean  @default(false)
+  noteEn    String   @default("")
+  noteHi    String   @default("")
+}

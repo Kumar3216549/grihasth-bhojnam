@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Grihasth Bhojnam">
+  <circle cx="32" cy="32" r="31" fill="#F28C28"/>
+  <circle cx="32" cy="32" r="27" fill="#FFFBF3"/>
+  <path d="M15 46V21Q32 9 49 21V46" fill="none" stroke="#7D858E" stroke-width="2.2" stroke-linejoin="round"/>
+  <rect x="17" y="22" width="30" height="8" rx="2.5" fill="#CDD2D8"/>
+  <rect x="17" y="31" width="30" height="8" rx="2.5" fill="#BAC0C7"/>
+  <rect x="17" y="40" width="30" height="8" rx="2.5" fill="#A7AEB6"/>
+  <rect x="19" y="24" width="26" height="1.5" rx=".75" fill="#fff" opacity=".8"/>
+  <rect x="19" y="33" width="26" height="1.5" rx=".75" fill="#fff" opacity=".7"/>
+  <rect x="19" y="42" width="26" height="1.5" rx=".75" fill="#fff" opacity=".6"/>
+  <path d="M32 15.5c1-4 4.5-6.5 9-6-0.6 4.2-4.4 6.6-9 6z" fill="#1E7B3A"/>
+  <path d="M32 15.5c-.8-3-3.2-4.8-6.4-4.6.6 3 3.2 4.8 6.4 4.6z" fill="#2A8A45"/>
+  <path d="M17 52h30" stroke="#F28C28" stroke-width="2.2" stroke-linecap="round"/>
+</svg>
