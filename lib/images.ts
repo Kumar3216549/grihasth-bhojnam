@@ -3,7 +3,7 @@
 const u = (id: string) => `https://images.unsplash.com/photo-${id}`;
 
 export const IMAGES = {
-  heroWorkers: u("1680359873864-43e89bf248ac"), // veg thali with roti, top view
+  heroWorkers: "/photos/hero-lunch.svg", // illustration: workers having lunch together at a clean canteen table
   workersLunch: u("1567337710282-00832b415979"), // roti with dal in steel thali
   thaliRoti: u("1742281257687-092746ad6021"), // steel veg thali with rice
   thaliTop: u("1626777552726-4a6b54c97e46"), // steel thali top view
