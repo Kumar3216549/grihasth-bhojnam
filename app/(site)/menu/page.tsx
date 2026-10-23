@@ -5,7 +5,8 @@ import { getDict } from "@/lib/lang";
 import { getSettings, paneerDayList, prices } from "@/lib/settings";
 import { getWeekMenu } from "@/lib/menu";
 import { todayDb, fmtDate } from "@/lib/dates";
-import { IMAGES } from "@/lib/images";
+import { IMAGES, IMAGES_ZOOM } from "@/lib/images";
+import FlipImage from "@/components/FlipImage";
 
 export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
@@ -13,6 +14,9 @@ export const metadata: Metadata = {
   description: "Aaj ka menu: 4 tawa roti, rice, dal fry, mix veg / paneer sabji, salad. Factory tiffin delivery, weekly sabji rotation.",
   alternates: { canonical: "/menu" },
 };
+
+const mixVegSlide = (lang: "hi" | "en") => ({ src: IMAGES.mixVeg, alt: "Mix veg sabji with peas, carrot and cauliflower", label: lang === "hi" ? "मिक्स वेज" : "Mix Veg" });
+const paneerSlide = (lang: "hi" | "en") => ({ src: IMAGES.paneer, alt: "Paneer butter masala with soft paneer cubes", label: lang === "hi" ? "⭐ पनीर स्पेशल" : "⭐ Paneer Special", zoom: IMAGES_ZOOM.paneer.zoom, origin: IMAGES_ZOOM.paneer.origin });
 
 export default async function MenuPage() {
   const { lang, t } = getDict();
@@ -24,9 +28,14 @@ export default async function MenuPage() {
     { img: IMAGES.rotiTawa, en: "4 Tawa Roti", hi: "4 तवा रोटी", dEn: "Fresh atta, made on tawa, soft & phuli hui", dHi: "ताज़ा आटा, तवे पर बनी, नरम और फूली हुई" },
     { img: IMAGES.rice, en: "Rice", hi: "चावल", dEn: "Steamed / jeera rice", dHi: "सादा / जीरा चावल" },
     { img: IMAGES.dal, en: "Dal Fry", hi: "दाल फ्राई", dEn: "Arhar-moong dal with ghee tadka", dHi: "अरहर-मूंग दाल, घी का तड़का" },
-    today.isPaneer
-      ? { img: IMAGES.paneer, en: "Paneer Sabji", hi: "पनीर सब्ज़ी", dEn: "Paneer Special — today!", dHi: "आज पनीर स्पेशल!" }
-      : { img: IMAGES.mixVeg, en: "Mix Veg / Seasonal Sabji", hi: "मिक्स वेज / मौसमी सब्ज़ी", dEn: "Changes every day", dHi: "रोज़ बदलती है" },
+    {
+      img: IMAGES.mixVeg,
+      flip: true,
+      en: "Mix Veg / Paneer Sabji",
+      hi: "मिक्स वेज / पनीर सब्ज़ी",
+      dEn: "Mix veg daily, Paneer Special twice a week",
+      dHi: "रोज़ मिक्स वेज, हफ़्ते में दो बार पनीर स्पेशल",
+    },
     { img: IMAGES.salad, en: "Salad", hi: "सलाद", dEn: "Onion, cucumber, carrot, lemon", dHi: "प्याज़, खीरा, गाजर, नींबू" },
   ];
 
@@ -46,7 +55,18 @@ export default async function MenuPage() {
         {dishes.map((d) => (
           <article key={d.en} className="card overflow-hidden">
             <div className="relative aspect-[4/3]">
-              <Image src={d.img} alt={d.en} fill sizes="(min-width:1024px) 20vw, (min-width:640px) 50vw, 100vw" className="object-cover" />
+              {"flip" in d ? (
+                <FlipImage
+                  sizes="(min-width:1024px) 20vw, (min-width:640px) 50vw, 100vw"
+                  slides={
+                    today.isPaneer
+                      ? [paneerSlide(lang), mixVegSlide(lang)]
+                      : [mixVegSlide(lang), paneerSlide(lang)]
+                  }
+                />
+              ) : (
+                <Image src={d.img} alt={d.en} fill sizes="(min-width:1024px) 20vw, (min-width:640px) 50vw, 100vw" className="object-cover" />
+              )}
             </div>
             <div className="p-4">
               <h3 className="font-bold">{lang === "hi" ? d.hi : d.en}</h3>
