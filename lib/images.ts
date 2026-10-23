@@ -1,21 +1,22 @@
-// 100% vegetarian. All photos are free-licence Unsplash images (https://unsplash.com/license).
+// 100% शुद्ध शाकाहारी. Real food photos are free-licence Unsplash images (https://unsplash.com/license),
+// each checked by eye to show only veg food (roti, dal, rice, paneer, sabji, salad) — no chunky curries that could look non-veg.
 // Replace any of them with your own real kitchen / delivery photos later: put the file in /public/photos and use "/photos/name.jpg".
 const u = (id: string) => `https://images.unsplash.com/photo-${id}`;
 
 export const IMAGES = {
   heroWorkers: "/photos/hero-lunch.svg", // illustration: workers having lunch together at a clean canteen table
-  workersLunch: u("1567337710282-00832b415979"), // roti with dal in steel thali
-  thaliRoti: u("1742281257687-092746ad6021"), // steel veg thali with rice
-  thaliTop: u("1626777552726-4a6b54c97e46"), // steel thali top view
-  paneer: u("1631452180539-96aca7d48617"), // paneer butter masala, rice, papad
-  rotiCurry: u("1767114915936-745dd372f1d8"), // palak with paratha
-  curryBowls: u("1585937421612-70a008356fbe"), // dal / sabji bowls
-  dal: u("1755090154817-58d9d36ec988"), // yellow dal tadka
-  mixVeg: u("1778439800378-6f67fd8ec219"), // seasonal veg sabji
-  rice: u("1788603092417-a01e665e0ab2"), // jeera rice with dal
-  salad: u("1541696432-7a70d69e0309"), // fresh veg salad
-  rotiTawa: u("1764699486820-30a00e6ded7a"), // roti on tawa over flame
-  rotiTawa2: u("1780907084874-14d202d39bf1"),
+  workersLunch: u("1789990642036-e10c2df4fc81"), // aloo matar with puri
+  thaliRoti: u("1727018742095-14c9a05aa71a"), // yellow dal, rice and cucumber
+  thaliTop: u("1680359873864-43e89bf248ac"), // steel veg thali with rotis and katoris
+  paneer: u("1589647363585-f4a7d3877b10"), // palak paneer — paneer cubes clearly visible
+  rotiCurry: u("1717587052948-fb9825de50f8"), // chole bhature
+  curryBowls: u("1589778655375-3e622a9fc91c"), // big veg thali with many katoris
+  dal: u("1626500154744-e4b394ffea16"), // dal with green chilli, lemon and onion
+  mixVeg: u("1764312538830-d67452377fed"), // beans, potato and onion sabji
+  rice: u("1751618646882-4221d5e3b1c2"), // veg pulao with peas and paneer
+  salad: u("1722032617357-7b09276b1a8d"), // fresh green salad with tomato and cucumber
+  rotiTawa: u("1786640442878-0c216561af21"), // roti being made on a tawa
+  rotiTawa2: u("1780907084884-ded9fddbb474"), // roti on tawa
   steelTiffin: u("1633504785850-018cae02cb47"), // steel tiffin carriers
-  kitchen: u("1767114915989-c6ab3c8fc42e"), // fresh veg curries & rice
+  kitchen: u("1600935926387-12d9b03066f0"), // fresh stack of chapatis
 };
