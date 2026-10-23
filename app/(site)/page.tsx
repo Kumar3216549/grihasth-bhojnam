@@ -62,7 +62,7 @@ export default async function Home() {
 
           <div className="relative">
             <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem] shadow-2xl ring-8 ring-white">
-              <Image src={IMAGES.heroWorkers} alt="Workers eating lunch together" fill priority sizes="(min-width:1024px) 560px, 100vw" className="object-cover" />
+              <Image src={IMAGES.heroWorkers} alt="Ghar jaisi veg thali" fill priority sizes="(min-width:1024px) 560px, 100vw" className="object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-ink/50 via-transparent to-transparent" />
             </div>
             {/* thali card */}
@@ -141,9 +141,9 @@ export default async function Home() {
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
           {[
             [IMAGES.rotiTawa, lang === "hi" ? "तवे पर फूली रोटी" : "Tawa roti, fresh"],
-            [IMAGES.kitchen, lang === "hi" ? "रोज़ सुबह ताज़ा" : "Cooked every morning"],
+            [IMAGES.kitchen, lang === "hi" ? "रोज़ सुबह ताज़ा" : "Fresh every morning"],
             [IMAGES.steelTiffin, lang === "hi" ? "स्टील टिफ़िन" : "Steel tiffin"],
-            [IMAGES.workersLunch, lang === "hi" ? "साथ में भोजन" : "Lunch together"],
+            [IMAGES.workersLunch, lang === "hi" ? "घर जैसी थाली" : "Ghar jaisi thali"],
           ].map(([src, cap]) => (
             <figure key={src} className="relative aspect-square overflow-hidden rounded-2xl">
               <Image src={src} alt={cap} fill sizes="(min-width:640px) 25vw, 50vw" className="object-cover transition duration-500 hover:scale-105" />
