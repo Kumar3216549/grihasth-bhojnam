@@ -1,10 +1,10 @@
-// 100% शुद्ध शाकाहारी. Real food photos are free-licence Unsplash images (https://unsplash.com/license),
+// 100% शुद्ध शाकाहारी. Real photos: free-licence Unsplash (https://unsplash.com/license) and Pexels (https://www.pexels.com/license/) images,
 // each checked by eye to show only veg food (roti, dal, rice, paneer, sabji, salad) — no chunky curries that could look non-veg.
 // Replace any of them with your own real kitchen / delivery photos later: put the file in /public/photos and use "/photos/name.jpg".
 const u = (id: string) => `https://images.unsplash.com/photo-${id}`;
 
 export const IMAGES = {
-  heroWorkers: "/photos/hero-lunch.svg", // illustration: workers having lunch together at a clean canteen table
+  heroWorkers: "https://images.pexels.com/photos/9345661/pexels-photo-9345661.jpeg", // real photo (Pexels licence): mother and son enjoying a pure-veg lunch — roti, chole, paneer, rice
   workersLunch: u("1789990642036-e10c2df4fc81"), // aloo matar with puri
   thaliRoti: u("1727018742095-14c9a05aa71a"), // yellow dal, rice and cucumber
   thaliTop: u("1680359873864-43e89bf248ac"), // steel veg thali with rotis and katoris

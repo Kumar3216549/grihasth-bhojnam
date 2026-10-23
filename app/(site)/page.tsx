@@ -62,7 +62,7 @@ export default async function Home() {
 
           <div className="relative">
             <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem] shadow-2xl ring-8 ring-white">
-              <Image src={IMAGES.heroWorkers} alt="Workers having lunch together from steel thalis" fill priority sizes="(min-width:1024px) 560px, 100vw" className="object-cover" />
+              <Image src={IMAGES.heroWorkers} alt="Family enjoying a pure veg lunch of roti, chole, paneer and rice" fill priority sizes="(min-width:1024px) 560px, 100vw" className="object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-ink/50 via-transparent to-transparent" />
             </div>
             {/* thali card */}
