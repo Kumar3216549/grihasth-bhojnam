@@ -101,7 +101,7 @@ const en = {
       rice: "Fluffy jeera rice or plain steamed rice",
       dal: "Dal fry or dal tadka with a traditional tadka",
       sabji: "Changes daily — see the weekly menu below",
-      salad: "Onion, cucumber, carrot and lemon",
+      salad: "Cucumber, tomato, onion and lemon",
     },
     alt: {
       roti: "A roti puffing up on a hot tawa",
@@ -109,7 +109,7 @@ const en = {
       dal: "A bowl of dal fry with tadka",
       mixVeg: "Mix veg sabzi with potato, peas and carrot",
       paneer: "Paneer butter masala with soft paneer cubes",
-      salad: "Fresh salad of onion, cucumber, tomato and lemon",
+      salad: "A plate of cucumber, tomato and onion slices with green chilli",
     },
   },
   order: {
@@ -364,7 +364,7 @@ const hi: Dict = {
       rice: "खिले-खिले जीरा राइस या सादा भाप वाले चावल",
       dal: "पारंपरिक तड़के वाली दाल फ्राई या दाल तड़का",
       sabji: "रोज़ बदलती है — नीचे साप्ताहिक मेन्यू देखें",
-      salad: "प्याज़, खीरा, गाजर और नींबू",
+      salad: "खीरा, टमाटर, प्याज़ और नींबू",
     },
     alt: {
       roti: "गरम तवे पर फूलती रोटी",
@@ -372,7 +372,7 @@ const hi: Dict = {
       dal: "तड़के वाली दाल फ्राई का कटोरा",
       mixVeg: "आलू, मटर और गाजर वाली मिक्स वेज सब्ज़ी",
       paneer: "नरम पनीर के टुकड़ों वाला पनीर बटर मसाला",
-      salad: "प्याज़, खीरा, टमाटर और नींबू का ताज़ा सलाद",
+      salad: "खीरा, टमाटर, प्याज़ के टुकड़े और हरी मिर्च वाली सलाद की प्लेट",
     },
   },
   order: {
