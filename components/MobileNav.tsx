@@ -4,13 +4,13 @@ import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
-export default function MobileNav({ links }: { links: { href: string; label: string }[] }) {
+export default function MobileNav({ links, openLabel = "Open menu", closeLabel = "Close menu" }: { links: { href: string; label: string }[]; openLabel?: string; closeLabel?: string }) {
   const [open, setOpen] = useState(false);
   const path = usePathname();
   useEffect(() => setOpen(false), [path]);
   return (
     <>
-      <button onClick={() => setOpen((o) => !o)} className="rounded-lg p-2 text-ink" aria-label="Menu" aria-expanded={open}>
+      <button onClick={() => setOpen((o) => !o)} className="rounded-lg p-2 text-ink" aria-label={open ? closeLabel : openLabel} aria-expanded={open}>
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
           {open ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
         </svg>

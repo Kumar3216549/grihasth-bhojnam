@@ -92,3 +92,20 @@ Website photos are free-licence images from [Unsplash](https://unsplash.com/lice
 
 ---
 Made with ❤️ for India's working hands. © Grihasth Bhojnam by Sachin.
+
+## Update — Oct 2026: fixed menu, UPI prepaid, feedback
+
+- **Fixed daily menu (5 categories only):** 4 tawa roti · jeera rice / plain rice · dal fry · mix veg / paneer butter masala · salad.
+  Every meal also includes **2 packets of mukhwas** and **2 pieces of tissue paper** (shown on the menu, order summary, order page and invoice).
+  Per day you only choose the rice and whether paneer butter masala is available: **/admin/settings → Menu availability**.
+- **Payments:** customers choose **Prepaid (UPI)** or **COD pre-order** (pay cash at delivery).
+  - Prepaid goes ONLY to your own UPI. Add your **UPI ID** (and optionally a QR image link) in **/admin/settings → UPI**. Until then the website hides “Prepaid” and only offers COD.
+  - The customer sees the amount, UPI ID / QR, a “Pay in UPI app” button and enters the UPI reference (UTR). This is **not** proof of payment.
+  - Check the money in your bank / UPI app, then press **✅ Verify** in **/admin/orders** (section “UPI prepaid — waiting for your verification”). Only then is the order counted in the kitchen sheet and the customer gets the WhatsApp confirmation.
+  - Payment-screenshot upload is not enabled: it would need file storage (e.g. Vercel Blob). The UTR reference is enough to match payments.
+  - Razorpay code is still in the repo but no longer used by the order form.
+- **Contact:** phone 8434816583 (tap-to-call) and sachinjha608@gmail.com (mailto) in the header link, contact section and footer. Editable in settings.
+- **Feedback:** form on the home page (#feedback) → stored in the `Feedback` table → read at **/admin/feedback**. Spam guard: honeypot field, minimum fill time, rate limit; no IP or device data is stored.
+- **Look & fonts:** warm cream / saffron / earthy brown / leaf green, subtle mandala and toran details, “अन्नं ब्रह्म” shloka band. Fonts are the same as the Zindagi with Sachin site: **Merriweather + Mukta**.
+- **Photos:** owner-supplied images in `public/photos/` (hero, roti, jeera rice, mix veg, paneer butter masala, mukhwas, four promo cards cut out as separate images). Dal and salad use the Unsplash photos listed in the brief.
+- **Database:** new columns/tables are created automatically by `prisma db push` during the Vercel build (`Order.upiRef`, `Order.clientKey`, `DailyMenu.riceType`, `Feedback`, payment method `UPI`).

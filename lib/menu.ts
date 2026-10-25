@@ -1,37 +1,34 @@
 import { db } from "./db";
 import { addDays, weekday } from "./dates";
 
-export type MenuDay = { date: Date; sabjiEn: string; sabjiHi: string; isPaneer: boolean; noteEn: string; noteHi: string; closed: boolean };
+/**
+ * The menu is FIXED every day — exactly five categories:
+ *   4 tawa roti · jeera rice / plain rice · dal fry · mix veg / paneer butter masala · salad
+ * Only two things vary by date: which rice is cooked, and whether paneer butter masala is available.
+ * A saved DailyMenu row (from /admin/settings) wins; otherwise the settings decide.
+ */
+export type RiceType = "jeera" | "plain";
+export type MenuDay = { date: Date; isPaneer: boolean; rice: RiceType; closed: boolean };
 
-// Default weekly rotation (index = weekday, 0 = Sunday). Owner can override any date from /admin/settings.
-const ROTATION: { en: string; hi: string }[] = [
-  { en: "Closed", hi: "बंद" },
-  { en: "Aloo Gobhi + Dal Fry", hi: "आलू गोभी + दाल फ्राई" },
-  { en: "Mix Veg + Dal Tadka", hi: "मिक्स वेज + दाल तड़का" },
-  { en: "Paneer Butter Masala + Dal Fry", hi: "पनीर बटर मसाला + दाल फ्राई" },
-  { en: "Rajma + Jeera Rice", hi: "राजमा + जीरा राइस" },
-  { en: "Chhole + Mix Veg", hi: "छोले + मिक्स वेज" },
-  { en: "Matar Paneer + Dal Fry", hi: "मटर पनीर + दाल फ्राई" },
-];
+const asRice = (v: string | undefined, fallback: RiceType): RiceType => (v === "plain" || v === "jeera" ? v : fallback);
 
-export async function getMenu(date: Date, paneerDays: number[]): Promise<MenuDay> {
-  const wd = weekday(date);
+export async function getMenu(date: Date, paneerDays: number[], defaultRice: string = "jeera"): Promise<MenuDay> {
+  const closed = weekday(date) === 0;
+  const fallbackRice = asRice(defaultRice, "jeera");
   try {
     const row = await db.dailyMenu.findUnique({ where: { date } });
-    if (row) return { ...row, closed: false };
+    if (row) return { date, isPaneer: row.isPaneer && !closed, rice: asRice(row.riceType, fallbackRice), closed };
   } catch {}
-  const r = ROTATION[wd];
-  const isPaneer = paneerDays.includes(wd);
-  return { date, sabjiEn: r.en, sabjiHi: r.hi, isPaneer, noteEn: "", noteHi: "", closed: wd === 0 };
+  return { date, isPaneer: paneerDays.includes(weekday(date)) && !closed, rice: fallbackRice, closed };
 }
 
-export async function getWeekMenu(start: Date, paneerDays: number[]) {
+export async function getWeekMenu(start: Date, paneerDays: number[], defaultRice?: string) {
   const days: MenuDay[] = [];
-  for (let i = 0; i < 7; i++) days.push(await getMenu(addDays(start, i), paneerDays));
+  for (let i = 0; i < 7; i++) days.push(await getMenu(addDays(start, i), paneerDays, defaultRice));
   return days;
 }
 
-/** Single source of truth for "is this a paneer day": a saved menu row wins, otherwise the weekly setting. */
+/** Single source of truth for "is paneer butter masala available on this date". */
 export async function isPaneerOn(date: Date, paneerDays: number[]) {
   const m = await getMenu(date, paneerDays);
   return m.isPaneer && !m.closed;
@@ -50,3 +47,22 @@ export async function paneerDatesAhead(start: Date, n: number, paneerDays: numbe
   }
   return out;
 }
+
+/** Names used everywhere (website, order summary, admin). */
+export const DISH = {
+  roti: { en: "4 Tawa Roti", hi: "4 तवा रोटी" },
+  rice: { en: "Jeera Rice / Plain Rice", hi: "जीरा राइस / सादा चावल" },
+  jeera: { en: "Jeera Rice", hi: "जीरा राइस" },
+  plain: { en: "Plain Rice", hi: "सादा चावल" },
+  dal: { en: "Dal Fry", hi: "दाल फ्राई" },
+  sabji: { en: "Mix Veg / Paneer Butter Masala", hi: "मिक्स वेज / पनीर बटर मसाला" },
+  mixVeg: { en: "Mix Veg", hi: "मिक्स वेज" },
+  paneer: { en: "Paneer Butter Masala", hi: "पनीर बटर मसाला" },
+  salad: { en: "Salad", hi: "सलाद" },
+} as const;
+
+/** Fixed packing items included with EVERY meal / tiffin (not food categories, not optional). */
+export const INCLUDED = [
+  { key: "mukhwas", en: "2 Packets of Mukhwas", hi: "2 पैकेट मुखवास" },
+  { key: "tissue", en: "2 Pieces of Tissue Paper", hi: "2 पीस टिश्यू पेपर" },
+] as const;

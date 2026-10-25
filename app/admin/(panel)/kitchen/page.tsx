@@ -13,7 +13,7 @@ export default async function KitchenPage({ searchParams }: { searchParams: { da
   const date = /^\d{4}-\d{2}-\d{2}$/.test(searchParams.date || "") ? searchParams.date! : today;
   const d = dbDate(date);
   const s = await getSettings();
-  const [plan, menu] = await Promise.all([getDayPlan(d), getMenu(d, paneerDayList(s))]);
+  const [plan, menu] = await Promise.all([getDayPlan(d), getMenu(d, paneerDayList(s), s.riceType)]);
   const req = await getRequirements(plan.veg, plan.paneer);
   const factor = 1 + plan.bufferPct / 100;
 
@@ -25,14 +25,16 @@ export default async function KitchenPage({ searchParams }: { searchParams: { da
 
       <div className="a-card mb-6 flex flex-wrap items-center justify-between gap-6 !bg-gradient-to-r from-saffron-500 to-saffron-600 !text-white">
         <div>
-          <p className="text-sm opacity-90">{fmtDate(d)} · {menu.closed ? "Kitchen closed" : menu.sabjiEn}{plan.isPaneerDay && !plan.closed ? " · ⭐ Paneer day" : ""}</p>
+          <p className="text-sm opacity-90">{fmtDate(d)} · {menu.closed ? "Kitchen closed" : `${menu.rice === "plain" ? "Plain rice" : "Jeera rice"} · Mix veg${menu.isPaneer ? " + Paneer butter masala" : ""}`}</p>
           <p className="mt-1 text-5xl font-extrabold tabular-nums">{plan.toCook}</p>
           <p className="text-sm opacity-90">tiffins to make = {plan.total} booked + {plan.buffer} buffer ({plan.bufferPct}%)</p>
         </div>
-        <div className="grid grid-cols-3 gap-3 text-center">
+        <div className="grid grid-cols-3 gap-3 text-center sm:grid-cols-5">
           <div className="rounded-xl bg-white/15 px-4 py-3"><p className="text-2xl font-bold">{Math.ceil(plan.toCook * 4)}</p><p className="text-xs">Tawa roti</p></div>
           <div className="rounded-xl bg-white/15 px-4 py-3"><p className="text-2xl font-bold">{Math.ceil(plan.veg * factor)}</p><p className="text-xs">Veg sabji</p></div>
           <div className="rounded-xl bg-white/15 px-4 py-3"><p className="text-2xl font-bold">{Math.ceil(plan.paneer * factor)}</p><p className="text-xs">Paneer sabji</p></div>
+          <div className="rounded-xl bg-white/15 px-4 py-3"><p className="text-2xl font-bold">{plan.toCook * 2}</p><p className="text-xs">Mukhwas packets</p></div>
+          <div className="rounded-xl bg-white/15 px-4 py-3"><p className="text-2xl font-bold">{plan.toCook * 2}</p><p className="text-xs">Tissue papers</p></div>
         </div>
       </div>
 

@@ -23,6 +23,8 @@ enum ThaliType {
 enum PaymentMethod {
   COD
   ONLINE
+  /// Prepaid to the owner's own UPI ID / QR. Stays PENDING until an admin verifies it.
+  UPI
 }
 
 enum PaymentStatus {
@@ -136,6 +138,12 @@ model Order {
   status            OrderStatus    @default(NEW)
   razorpayOrderId   String?        @unique
   razorpayPaymentId String?
+  /// UPI transaction / reference ID typed by the customer. NOT proof of payment — admin must verify.
+  upiRef            String?
+  upiRefAt          DateTime?
+  paymentVerifiedAt DateTime?
+  /// Random key sent by the order form so a double-click / refresh never creates two orders
+  clientKey         String?        @unique
   notes             String         @default("")
   whatsappSent      Boolean        @default(false)
   invoice           Invoice?
@@ -217,12 +225,27 @@ model Expense {
   @@index([date])
 }
 
-/// Today's sabji. If no row exists for a date, the weekly rotation in lib/menu.ts is used.
+/// Per-date menu availability (paneer / rice type). If no row exists, settings decide (paneerDays, riceType).
 model DailyMenu {
   date      DateTime @id @db.Date
   sabjiEn   String
   sabjiHi   String
+  /// true = Paneer Butter Masala is available that day (instead of / along with Mix Veg)
   isPaneer  Boolean  @default(false)
+  /// "jeera" | "plain" — empty means use the riceType setting
+  riceType  String   @default("")
   noteEn    String   @default("")
   noteHi    String   @default("")
+}
+
+/// Customer feedback from the website form. No IP or device data is stored.
+model Feedback {
+  id        String   @id @default(cuid())
+  name      String   @default("")
+  rating    Int?
+  message   String
+  lang      String   @default("hi")
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
 }

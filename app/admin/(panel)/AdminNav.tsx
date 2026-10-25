@@ -12,7 +12,8 @@ const NAV = [
   { href: "/admin/inventory", label: "Inventory", hi: "स्टॉक", icon: "📦" },
   { href: "/admin/routes", label: "Delivery Routes", hi: "डिलीवरी रूट", icon: "🛵" },
   { href: "/admin/finance", label: "Profit & Loss", hi: "मुनाफ़ा / नुकसान", icon: "💰" },
-  { href: "/admin/settings", label: "Prices & Settings", hi: "दाम और सेटिंग", icon: "⚙️" },
+  { href: "/admin/feedback", label: "Feedback", hi: "ग्राहकों की राय", icon: "💬" },
+  { href: "/admin/settings", label: "Prices, Menu & UPI", hi: "दाम, मेन्यू और यूपीआई", icon: "⚙️" },
 ];
 
 export default function AdminNav({ today }: { today: string }) {

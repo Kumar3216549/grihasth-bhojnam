@@ -21,6 +21,7 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
     priceRange: "₹",
     url: SITE_URL,
     telephone: s.businessPhone,
+    email: s.email,
     image: `${SITE_URL}/og.png`,
     address: { "@type": "PostalAddress", streetAddress: s.kitchenAddress, addressLocality: s.city, addressRegion: "Gujarat", addressCountry: "IN" },
     areaServed: ["Odhav GIDC", "Kathwada GIDC", "Naroda GIDC", "Vatva GIDC", "Narol", "Changodar", "Ahmedabad"],
@@ -35,8 +36,8 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
       <Header lang={lang} t={t} />
       <main>{children}</main>
       <Footer lang={lang} t={t} s={s} />
-      <WhatsAppFloat number={s.whatsappNumber} text={lang === "hi" ? "नमस्ते, मुझे टिफ़िन चाहिए।" : "Namaste, I want to order tiffin."} />
-      <PWARegister label={t.pwa.install} hint={t.pwa.installHint} />
+      <WhatsAppFloat number={s.whatsappNumber} text={t.whatsappHello} label={t.a11y.whatsapp} />
+      <PWARegister label={t.pwa.install} hint={t.pwa.installHint} closeLabel={t.a11y.close} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </>
   );

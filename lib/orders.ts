@@ -3,7 +3,7 @@ import { z } from "zod";
 import { db, Prisma } from "./db";
 import { dbDate, endAfterWorkingDays, weekday, ymdIST } from "./dates";
 import { cleanPhone, slugify } from "./format";
-import { getSettings, paneerDayList, prices, shiftList } from "./settings";
+import { getSettings, paneerDayList, prices, shiftList, upiReady } from "./settings";
 import { orderMessage, sendWhatsApp, shiftTime } from "./whatsapp";
 import { SITE_URL } from "./site";
 import { isPaneerOn } from "./menu";
@@ -21,11 +21,19 @@ export const OrderInput = z.object({
   date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
   address: z.string().trim().max(300).optional().default(""),
   notes: z.string().trim().max(300).optional().default(""),
-  paymentMethod: z.enum(["COD", "ONLINE"]),
+  /** COD = pre-order, pay cash at delivery. UPI = prepaid to the owner's UPI, verified by admin. */
+  paymentMethod: z.enum(["COD", "UPI"]),
+  /** Random key from the order form — the same key never creates a second order */
+  clientKey: z.string().trim().regex(/^[A-Za-z0-9_-]{8,64}$/).optional(),
 });
 export type OrderInputT = z.infer<typeof OrderInput>;
 
-export class OrderError extends Error {}
+export type OrderErrorCode = "shift" | "past" | "sunday" | "monthlyPrepaid" | "paneer" | "upi" | "generic";
+export class OrderError extends Error {
+  constructor(message: string, public code: OrderErrorCode = "generic") {
+    super(message);
+  }
+}
 
 function orderNo() {
   const d = ymdIST().slice(2).replace(/-/g, "");
@@ -37,15 +45,22 @@ export async function createOrder(input: OrderInputT) {
   const s = await getSettings();
   const p = prices(s);
 
-  if (!shiftList(s).includes(input.shift)) throw new OrderError("Invalid shift");
+  if (!shiftList(s).includes(input.shift)) throw new OrderError("Invalid shift", "shift");
   const date = dbDate(input.date);
-  if (input.date < ymdIST()) throw new OrderError("Date is in the past");
-  if (weekday(date) === 0) throw new OrderError("Kitchen is closed on Sunday / रविवार को रसोई बंद है");
-  if (input.planType === "MONTHLY" && input.paymentMethod !== "ONLINE") throw new OrderError("Monthly plan must be paid online");
+  if (input.date < ymdIST()) throw new OrderError("Date is in the past", "past");
+  if (weekday(date) === 0) throw new OrderError("Kitchen is closed on Sunday", "sunday");
+  if (input.paymentMethod === "UPI" && !upiReady(s)) throw new OrderError("UPI prepayment is not set up yet", "upi");
+  if (input.planType === "MONTHLY" && input.paymentMethod !== "UPI") throw new OrderError("Monthly plan must be prepaid", "monthlyPrepaid");
+
+  // Duplicate protection: a repeated submit with the same key returns the order already created.
+  if (input.clientKey) {
+    const existing = await db.order.findUnique({ where: { clientKey: input.clientKey } });
+    if (existing) return existing;
+  }
 
   let thaliType = input.thaliType;
   if (input.planType === "MONTHLY") thaliType = "VEG"; // paneer days are included automatically
-  if (thaliType === "PANEER" && !(await isPaneerOn(date, paneerDayList(s)))) throw new OrderError("Paneer Special is only on paneer days");
+  if (thaliType === "PANEER" && !(await isPaneerOn(date, paneerDayList(s)))) throw new OrderError("Paneer butter masala is not available on this date", "paneer");
 
   const unitPrice = input.planType === "MONTHLY" ? p.monthly : thaliType === "PANEER" ? p.paneer : p.daily;
   const amount = unitPrice * input.qty;
@@ -92,6 +107,7 @@ export async function createOrder(input: OrderInputT) {
             deliveryDate: date,
             paymentMethod: input.paymentMethod,
             notes: input.notes,
+            clientKey: input.clientKey,
           },
         });
         if (input.planType === "MONTHLY") {
@@ -111,7 +127,14 @@ export async function createOrder(input: OrderInputT) {
         return order;
       });
     } catch (e) {
-      if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === "P2002" && attempt < 2) continue; // orderNo clash
+      if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === "P2002") {
+        // two identical submits raced: return the one that won
+        if (input.clientKey) {
+          const won = await db.order.findUnique({ where: { clientKey: input.clientKey } });
+          if (won) return won;
+        }
+        if (attempt < 2) continue; // orderNo clash
+      }
       throw e;
     }
   }
@@ -150,11 +173,11 @@ export async function ensureInvoice(orderId: string) {
   }
 }
 
-/** Idempotent: safe to call from both the browser callback and the Razorpay webhook. */
+/** Idempotent. Called by an admin after checking the money arrived (UPI), or by the Razorpay webhook. */
 export async function markPaid(orderId: string, paymentId: string | null) {
   const updated = await db.order.updateMany({
     where: { id: orderId, paymentStatus: { not: "PAID" } },
-    data: { paymentStatus: "PAID", status: "CONFIRMED", razorpayPaymentId: paymentId ?? undefined },
+    data: { paymentStatus: "PAID", status: "CONFIRMED", razorpayPaymentId: paymentId ?? undefined, paymentVerifiedAt: new Date() },
   });
   await ensureInvoice(orderId);
   await db.subscription.updateMany({ where: { orderId, status: "PENDING_PAYMENT" }, data: { status: "ACTIVE" } });

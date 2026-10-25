@@ -17,7 +17,7 @@ export default async function InvoicePage({ params }: { params: { token: string 
   const desc =
     o.planType === "MONTHLY"
       ? `Monthly Tiffin Plan (${o.subscription ? `${fmtDate(o.subscription.startDate)} – ${fmtDate(o.subscription.endDate)}` : ""}) · ${o.shift}`
-      : `${o.thaliType === "PANEER" ? "Paneer Special Thali" : "Veg Thali"} · ${fmtDate(o.deliveryDate)} · ${o.shift}`;
+      : `${o.thaliType === "PANEER" ? "Paneer Butter Masala Thali" : "Veg Thali"} · ${fmtDate(o.deliveryDate)} · ${o.shift}`;
 
   return (
     <div className="min-h-screen bg-stone-100 py-8 print:bg-white print:py-0">
@@ -54,8 +54,9 @@ export default async function InvoicePage({ params }: { params: { token: string 
           <div className="sm:text-right">
             <p className="text-xs font-semibold uppercase tracking-wider text-stone-500">Payment</p>
             <p className="mt-1 font-semibold">{o.paymentStatus === "PAID" ? "PAID ✓" : o.paymentStatus}</p>
-            <p className="text-sm text-stone-600">{o.paymentMethod === "ONLINE" ? "Online (Razorpay)" : "Cash"}</p>
+            <p className="text-sm text-stone-600">{o.paymentMethod === "UPI" ? "UPI (verified by Grihasth Bhojnam)" : o.paymentMethod === "ONLINE" ? "Online (Razorpay)" : "Cash on delivery"}</p>
             {o.razorpayPaymentId && <p className="text-xs text-stone-500">Ref: {o.razorpayPaymentId}</p>}
+            {o.upiRef && <p className="text-xs text-stone-500">UPI ref: {o.upiRef}</p>}
           </div>
         </section>
 
@@ -70,7 +71,7 @@ export default async function InvoicePage({ params }: { params: { token: string 
           </thead>
           <tbody>
             <tr className="border-b border-stone-100">
-              <td className="px-3 py-3">{desc}<br /><span className="text-xs text-stone-500">4 Tawa Roti, Rice, Dal Fry, Sabji, Salad</span></td>
+              <td className="px-3 py-3">{desc}<br /><span className="text-xs text-stone-500">4 Tawa Roti, Jeera / Plain Rice, Dal Fry, {o.thaliType === "PANEER" ? "Paneer Butter Masala" : "Mix Veg"}, Salad · with 2 packets of mukhwas and 2 pieces of tissue paper</span></td>
               <td className="px-3 py-3 text-right">{o.qty}</td>
               <td className="px-3 py-3 text-right">₹{o.unitPrice.toLocaleString("en-IN")}</td>
               <td className="px-3 py-3 text-right">₹{o.amount.toLocaleString("en-IN")}</td>

@@ -8,7 +8,7 @@ import { orderMessage } from "@/lib/whatsapp";
 import { Badge, Flash, PageTitle, Stat, statusTone } from "@/components/admin/ui";
 import AutoSubmitSelect from "@/components/admin/AutoSubmitSelect";
 import DateNav from "@/components/admin/DateNav";
-import { addPhoneOrder, markCashReceived, resendWhatsApp, setCompanyStatus, setOrderStatus } from "../actions";
+import { addPhoneOrder, markCashReceived, rejectUpiPayment, resendWhatsApp, setCompanyStatus, setOrderStatus, verifyUpiPayment } from "../actions";
 
 const STATUS_OPTS = [
   { v: "NEW", l: "New" },
@@ -23,11 +23,17 @@ export default async function OrdersPage({ searchParams }: { searchParams: { dat
   const today = ymdIST();
   const date = /^\d{4}-\d{2}-\d{2}$/.test(searchParams.date || "") ? searchParams.date! : today;
   const d = dbDate(date);
-  const [plan, other, areas, s] = await Promise.all([
+  const [plan, other, upiPending, areas, s] = await Promise.all([
     getDayPlan(d),
     db.order.findMany({
       where: { deliveryDate: d, OR: [{ status: "CANCELLED" }, { paymentMethod: "ONLINE", paymentStatus: { not: "PAID" } }] },
       orderBy: { createdAt: "desc" },
+    }),
+    // every UPI prepaid order still waiting for the owner to check the money (any date)
+    db.order.findMany({
+      where: { paymentMethod: "UPI", paymentStatus: "PENDING", status: { not: "CANCELLED" } },
+      orderBy: [{ upiRefAt: { sort: "desc", nulls: "last" } }, { createdAt: "desc" }],
+      take: 50,
     }),
     db.area.findMany({ orderBy: { routeSeq: "asc" } }),
     getSettings(),
@@ -48,6 +54,33 @@ export default async function OrdersPage({ searchParams }: { searchParams: { dat
         <Stat label="Daily orders" value={plan.lines.filter((l) => l.source === "ORDER").length} sub={`${plan.lines.filter((l) => l.source === "SUBSCRIPTION").length} monthly subscribers`} />
         <Stat tone={codDue ? "amber" : "stone"} label="Cash to collect" value={inr(codDue)} />
       </div>
+
+      <section id="verify" className="a-card mb-6 scroll-mt-20">
+        <h2 className="font-semibold">📱 UPI prepaid — waiting for your verification ({upiPending.length})</h2>
+        <p className="mt-1 text-xs text-stone-500">
+          Open your bank / UPI app, find a payment of the exact amount with this reference ID, and only then press “Verify”.
+          A reference ID typed by the customer is not proof of payment. Unverified orders are not counted in the kitchen sheet.
+        </p>
+        {upiPending.length === 0 ? (
+          <p className="mt-3 text-sm text-stone-500">Nothing to verify.</p>
+        ) : (
+          <ul className="mt-3 divide-y divide-stone-100 text-sm">
+            {upiPending.map((o) => (
+              <li key={o.id} className="flex flex-wrap items-center justify-between gap-2 py-2.5">
+                <span>
+                  <b>{inr(o.amount)}</b> · {o.orderNo} · {o.customerName} ({o.phone}) · {o.companyName} · {o.planType === "MONTHLY" ? "Monthly" : `×${o.qty}`} · {o.deliveryDate.toISOString().slice(0, 10)}
+                  <br />
+                  {o.upiRef ? <span className="font-mono text-xs">UPI ref: <b>{o.upiRef}</b></span> : <span className="text-xs text-amber-700">No reference ID yet — customer may not have paid</span>}
+                </span>
+                <span className="flex gap-1.5">
+                  <form action={verifyUpiPayment}><input type="hidden" name="id" value={o.id} /><button className="a-btn !py-1 text-xs">✅ Verify — money received</button></form>
+                  <form action={rejectUpiPayment}><input type="hidden" name="id" value={o.id} /><button className="a-btn-ghost !py-1 text-xs">✕ Not received / cancel</button></form>
+                </span>
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
 
       {plan.closed && <p className="a-card mb-6 text-sm">Sunday — kitchen closed. Monthly tiffins are not delivered today.</p>}
 
@@ -147,7 +180,7 @@ export default async function OrdersPage({ searchParams }: { searchParams: { dat
           <input name="company" placeholder="Company / factory" className="a-input" required />
           <select name="areaSlug" className="a-input">{areas.map((a) => <option key={a.id} value={a.slug}>{a.nameEn}</option>)}</select>
           <select name="shift" className="a-input">{shiftList(s).map((x) => <option key={x}>{x}</option>)}</select>
-          <select name="thaliType" className="a-input"><option value="VEG">Veg Thali</option><option value="PANEER">Paneer Special</option></select>
+          <select name="thaliType" className="a-input"><option value="VEG">Veg Thali</option><option value="PANEER">Paneer Butter Masala</option></select>
           <input name="qty" type="number" min={1} defaultValue={1} className="a-input" />
           <input name="date" type="date" defaultValue={date} className="a-input" />
           <input name="address" placeholder="Gate / address" className="a-input sm:col-span-2 lg:col-span-3" />

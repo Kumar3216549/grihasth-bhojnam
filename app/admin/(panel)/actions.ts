@@ -5,7 +5,7 @@ import { db, type OrderStatus } from "@/lib/db";
 import { requireAdmin } from "@/lib/auth";
 import { dbDate, endAfterWorkingDays, todayDb, ymdIST, addDays } from "@/lib/dates";
 import { getDayPlan } from "@/lib/kitchen";
-import { createOrder, ensureInvoice, invoiceUrl, OrderError, OrderInput } from "@/lib/orders";
+import { createOrder, ensureInvoice, invoiceUrl, markPaid, OrderError, OrderInput } from "@/lib/orders";
 import { SETTING_DEFAULTS, getSettings, prices } from "@/lib/settings";
 import { sendWhatsApp } from "@/lib/whatsapp";
 import { slugify } from "@/lib/format";
@@ -43,6 +43,31 @@ export async function markCashReceived(f: FormData) {
   await db.order.update({ where: { id }, data: { paymentStatus: "PAID" } });
   await ensureInvoice(id);
   revalidatePath("/admin", "layout");
+}
+
+/**
+ * Owner confirms a UPI prepayment AFTER checking the money in the bank / UPI app.
+ * The customer's reference ID is never treated as proof by itself.
+ */
+export async function verifyUpiPayment(f: FormData) {
+  await requireAdmin();
+  const id = str(f, "id");
+  const o = await db.order.findUnique({ where: { id }, select: { paymentMethod: true } });
+  if (!o || o.paymentMethod !== "UPI") return;
+  await markPaid(id, null);
+  revalidatePath("/admin", "layout");
+}
+
+export async function rejectUpiPayment(f: FormData) {
+  await requireAdmin();
+  await db.order.update({ where: { id: str(f, "id") }, data: { paymentStatus: "FAILED", status: "CANCELLED" } });
+  revalidatePath("/admin", "layout");
+}
+
+export async function deleteFeedback(f: FormData) {
+  await requireAdmin();
+  await db.feedback.delete({ where: { id: str(f, "id") } }).catch(() => null);
+  revalidatePath("/admin/feedback");
 }
 
 export async function addPhoneOrder(f: FormData) {
@@ -250,8 +275,17 @@ export async function saveMenu(f: FormData) {
   if (str(f, "reset") === "1") {
     await db.dailyMenu.deleteMany({ where: { date } });
   } else {
-    const data = { sabjiEn: str(f, "sabjiEn"), sabjiHi: str(f, "sabjiHi") || str(f, "sabjiEn"), isPaneer: f.get("isPaneer") === "on", noteEn: str(f, "noteEn"), noteHi: str(f, "noteHi") };
-    if (!data.sabjiEn) return;
+    // Fixed five-category menu: only rice type and paneer availability change per day.
+    const isPaneer = f.get("isPaneer") === "on";
+    const riceType = str(f, "riceType") === "plain" ? "plain" : "jeera";
+    const data = {
+      isPaneer,
+      riceType,
+      sabjiEn: isPaneer ? "Mix Veg / Paneer Butter Masala" : "Mix Veg",
+      sabjiHi: isPaneer ? "मिक्स वेज / पनीर बटर मसाला" : "मिक्स वेज",
+      noteEn: "",
+      noteHi: "",
+    };
     await db.dailyMenu.upsert({ where: { date }, create: { date, ...data }, update: data });
   }
   revalidatePath("/", "layout");

@@ -38,8 +38,8 @@ export default async function AreaPage({ params }: { params: { area: string } })
       </h1>
       <p className="mt-3 max-w-2xl text-lg text-ink/70">
         {lang === "hi"
-          ? `${name} की फैक्ट्रियों और कंपनियों में रोज़ घर जैसा टिफ़िन — ₹${p.daily} डेली, ₹${p.monthly} मंथली। शिफ्ट टाइम पर गेट डिलीवरी।`
-          : `Ghar jaisa tiffin delivered daily to factories and companies in ${name} — ₹${p.daily} daily, ₹${p.monthly} monthly. Gate delivery by shift time.`}
+          ? `${name} की फैक्ट्रियों और कंपनियों में रोज़ घर जैसा टिफ़िन — ₹${p.daily} प्रतिदिन, ₹${p.monthly} प्रति माह। शिफ्ट टाइम पर गेट डिलीवरी।`
+          : `Home-style tiffin delivered daily to factories and companies in ${name} — ₹${p.daily} daily, ₹${p.monthly} monthly. Gate delivery by shift time.`}
       </p>
       {a.companies.length > 0 && (
         <p className="mt-4 text-sm text-ink/60">

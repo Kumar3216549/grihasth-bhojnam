@@ -54,7 +54,7 @@ export default function PlanCards({ t, p, cutoff, whatsapp }: { t: Dict; p: P; c
       </div>
       <div className="mt-6 flex flex-col items-center justify-between gap-3 rounded-2xl border border-leaf-200 bg-leaf-50 p-5 sm:flex-row">
         <p className="text-sm font-medium text-leaf-900">🏭 {t.plans.bulk}</p>
-        <a href={`https://wa.me/${whatsapp}?text=${encodeURIComponent("Namaste, bulk tiffin rate for our factory?")}`} target="_blank" rel="noopener" className="btn-green !py-2">
+        <a href={`https://wa.me/${whatsapp}?text=${encodeURIComponent(t.plans.bulkMsg)}`} target="_blank" rel="noopener" className="btn-green !py-2">
           {t.plans.bulkCta}
         </a>
       </div>

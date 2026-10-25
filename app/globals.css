@@ -4,8 +4,24 @@
 
 :root { color-scheme: light; }
 html { scroll-behavior: smooth; }
-body { @apply bg-cream text-ink antialiased; }
-html[lang="hi"] body { font-family: "Noto Sans Devanagari", "Poppins", system-ui, sans-serif; }
+body {
+  @apply bg-cream text-ink antialiased;
+  /* warm handmade-paper feel: very soft saffron glow in the corners */
+  background-image:
+    radial-gradient(1200px 500px at 100% -10%, rgba(242,140,40,.08), transparent 60%),
+    radial-gradient(900px 500px at -10% 110%, rgba(30,123,58,.05), transparent 60%);
+  background-attachment: fixed;
+  line-height: 1.65;
+}
+/* Hindi pages read better in Mukta (the Devanagari face of the Zindagi with Sachin site) */
+html[lang="hi"] body { font-family: "Mukta", "Merriweather", Georgia, serif; }
+h1, h2, h3 { font-family: "Merriweather", "Mukta", Georgia, serif; letter-spacing: -0.01em; }
+html[lang="hi"] h1, html[lang="hi"] h2, html[lang="hi"] h3 { font-family: "Mukta", "Merriweather", serif; letter-spacing: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
 
 @layer components {
   .container-x { @apply mx-auto w-full max-w-6xl px-4 sm:px-6; }
@@ -13,11 +29,12 @@ html[lang="hi"] body { font-family: "Noto Sans Devanagari", "Poppins", system-ui
   .btn-primary { @apply btn bg-saffron-500 text-white shadow-sm hover:bg-saffron-600 focus-visible:ring-saffron-200; }
   .btn-green { @apply btn bg-leaf-600 text-white hover:bg-leaf-700 focus-visible:ring-leaf-200; }
   .btn-ghost { @apply btn border border-saffron-200 bg-white text-saffron-800 hover:bg-saffron-50 focus-visible:ring-saffron-100; }
-  .card { @apply rounded-2xl border border-saffron-100 bg-white shadow-card; }
-  .label { @apply mb-1.5 block text-sm font-medium text-ink/80; }
-  .input { @apply w-full rounded-xl border border-saffron-200 bg-white px-3.5 py-2.5 text-base text-ink placeholder:text-ink/40 focus:border-saffron-400 focus:outline-none focus:ring-4 focus:ring-saffron-100; }
+  .card { @apply rounded-2xl border border-earth-100 bg-white shadow-card; }
+  .label { @apply mb-1.5 block text-sm font-semibold text-ink/80; }
+  .input { @apply w-full rounded-xl border border-earth-200 bg-white px-3.5 py-2.5 text-base text-ink placeholder:text-ink/40 focus:border-saffron-400 focus:outline-none focus:ring-4 focus:ring-saffron-100; }
   .chip { @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold; }
-  .h-section { @apply text-2xl font-bold tracking-tight text-ink sm:text-3xl; }
+  .h-section { @apply text-2xl font-bold tracking-tight text-earth-800 sm:text-3xl; }
+  .eyebrow { @apply text-xs font-bold uppercase tracking-[0.18em] text-saffron-700; }
   /* admin */
   .a-card { @apply rounded-xl border border-stone-200 bg-white p-4 shadow-sm; }
   .a-input { @apply w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm focus:border-saffron-400 focus:outline-none focus:ring-2 focus:ring-saffron-100; }
@@ -27,9 +44,26 @@ html[lang="hi"] body { font-family: "Noto Sans Devanagari", "Poppins", system-ui
   .a-td { @apply px-3 py-2.5 text-sm; }
 }
 
+/* Subtle rangoli dot grid */
 .tiffin-pattern {
-  background-image: radial-gradient(circle at 1px 1px, rgba(242,140,40,.18) 1px, transparent 0);
+  background-image: radial-gradient(circle at 1px 1px, rgba(242,140,40,.16) 1px, transparent 0);
   background-size: 18px 18px;
+}
+
+/* Soft mandala watermark (inline SVG, no external file). Used behind hero and section bands. */
+.mandala-bg {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cg fill='none' stroke='%23DD7212' stroke-width='.8' opacity='.55'%3E%3Ccircle cx='100' cy='100' r='96'/%3E%3Ccircle cx='100' cy='100' r='70'/%3E%3Ccircle cx='100' cy='100' r='40'/%3E%3Ccircle cx='100' cy='100' r='12'/%3E%3Cg id='p'%3E%3Cpath d='M100 4c10 18 10 34 0 48c-10-14-10-30 0-48z'/%3E%3Cpath d='M100 30c6 10 6 20 0 28c-6-8-6-18 0-28z'/%3E%3C/g%3E%3Cuse href='%23p' transform='rotate(30 100 100)'/%3E%3Cuse href='%23p' transform='rotate(60 100 100)'/%3E%3Cuse href='%23p' transform='rotate(90 100 100)'/%3E%3Cuse href='%23p' transform='rotate(120 100 100)'/%3E%3Cuse href='%23p' transform='rotate(150 100 100)'/%3E%3Cuse href='%23p' transform='rotate(180 100 100)'/%3E%3Cuse href='%23p' transform='rotate(210 100 100)'/%3E%3Cuse href='%23p' transform='rotate(240 100 100)'/%3E%3Cuse href='%23p' transform='rotate(270 100 100)'/%3E%3Cuse href='%23p' transform='rotate(300 100 100)'/%3E%3Cuse href='%23p' transform='rotate(330 100 100)'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+/* Toran-style scalloped edge (marigold garland feel) for section tops */
+.toran {
+  height: 14px;
+  background:
+    radial-gradient(circle at 10px 0, #F28C28 6px, transparent 6.5px) 0 0 / 20px 14px repeat-x,
+    radial-gradient(circle at 10px 0, #FDB066 9px, transparent 9.5px) 0 0 / 20px 14px repeat-x;
 }
 
 @media print {

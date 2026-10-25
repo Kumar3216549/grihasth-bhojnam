@@ -1,10 +1,10 @@
-export default function WhatsAppFloat({ number, text }: { number: string; text: string }) {
+export default function WhatsAppFloat({ number, text, label = "WhatsApp" }: { number: string; text: string; label?: string }) {
   return (
     <a
       href={`https://wa.me/${number}?text=${encodeURIComponent(text)}`}
       target="_blank"
       rel="noopener"
-      aria-label="WhatsApp"
+      aria-label={label}
       className="no-print fixed bottom-5 right-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg ring-4 ring-white transition hover:scale-105"
     >
       <svg viewBox="0 0 32 32" width="28" height="28" fill="currentColor" aria-hidden>

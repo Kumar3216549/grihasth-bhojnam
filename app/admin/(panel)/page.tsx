@@ -17,7 +17,7 @@ export default async function Dashboard() {
     getDayPlan(addDays(today, 1)),
     db.subscription.count({ where: { status: "ACTIVE", endDate: { gte: today } } }),
     db.subscription.findMany({ where: { status: "ACTIVE", endDate: { gte: today, lte: addDays(today, 3) } }, include: { customer: true, company: true }, orderBy: { endDate: "asc" } }),
-    db.order.count({ where: { paymentMethod: "ONLINE", paymentStatus: "PENDING", createdAt: { gte: addDays(today, -2) } } }),
+    db.order.count({ where: { paymentMethod: { in: ["ONLINE", "UPI"] }, paymentStatus: "PENDING", status: { not: "CANCELLED" }, createdAt: { gte: addDays(today, -7) } } }),
     db.order.findMany({ where: { status: "NEW" }, orderBy: { createdAt: "desc" }, take: 6 }),
     getPnL(start, monthEnd),
   ]);
@@ -41,7 +41,7 @@ export default async function Dashboard() {
         <Stat icon="💵" label="Paid today" value={inr(todayRevenue)} sub={`COD to collect: ${inr(codDue)}`} />
         <Stat tone={pnl.profit >= 0 ? "leaf" : "red"} icon="💰" label="Profit this month" value={inr(pnl.profit)} sub={`Revenue ${inr(pnl.revenue)} · Exp ${inr(pnl.expenseTotal)}`} />
         <Stat icon="🧮" label="Food cost / tiffin" value={inr(pnl.costPerTiffin.veg)} sub={`Paneer: ${inr(pnl.costPerTiffin.paneer)}`} />
-        <Stat tone={pendingOnline ? "amber" : "stone"} icon="⏳" label="Online payment pending" value={pendingOnline} sub="last 2 days" />
+        <Link href="/admin/orders#verify"><Stat tone={pendingOnline ? "amber" : "stone"} icon="⏳" label="UPI to verify" value={pendingOnline} sub="last 7 days · check bank first" /></Link>
       </div>
 
       <div className="mt-6 grid gap-6 lg:grid-cols-3">
