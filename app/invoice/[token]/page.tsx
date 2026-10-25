@@ -71,7 +71,7 @@ export default async function InvoicePage({ params }: { params: { token: string 
           </thead>
           <tbody>
             <tr className="border-b border-stone-100">
-              <td className="px-3 py-3">{desc}<br /><span className="text-xs text-stone-500">4 Tawa Roti, Jeera / Plain Rice, Dal Fry, {o.thaliType === "PANEER" ? "Paneer Butter Masala" : "Mix Veg"}, Salad · with 2 packets of mukhwas and 2 pieces of tissue paper</span></td>
+              <td className="px-3 py-3">{desc}<br /><span className="text-xs text-stone-500">4 Tawa Roti, Rice, Dal, {o.thaliType === "PANEER" ? "Paneer Special sabji" : "Sabji of the day"}, Salad · with 2 packets of mukhwas and 2 pieces of tissue paper</span></td>
               <td className="px-3 py-3 text-right">{o.qty}</td>
               <td className="px-3 py-3 text-right">₹{o.unitPrice.toLocaleString("en-IN")}</td>
               <td className="px-3 py-3 text-right">₹{o.amount.toLocaleString("en-IN")}</td>

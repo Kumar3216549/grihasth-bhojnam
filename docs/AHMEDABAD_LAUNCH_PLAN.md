@@ -17,7 +17,7 @@ Deliver in **clusters**, not all over the city. One rider can cover one cluster 
 | **South / दक्षिण** | Vatva GIDC → Narol → Aslali | Vatva & Narol active on the site, take orders only when you have 2 riders |
 | **West / पश्चिम** (Sarkhej–Bavla highway) | Changodar → Moraiya → Sanand GIDC | Off — phase 3 (after 150 tiffins/day) |
 
-**Why start East?** Odhav, Kathwada and Naroda sit close together, have many small and mid-size units (plastics, engineering, chemicals, textiles), and a large Hindi-speaking migrant workforce — exactly the ₹60 thali customer. A kitchen in or near **Odhav / Nikol / Bapunagar** can reach all three within one lunch window.
+**Why start East?** Odhav, Kathwada and Naroda sit close together, have many small and mid-size units (plastics, engineering, chemicals, textiles), and a large Hindi-speaking migrant workforce — exactly the ₹80 thali customer. A kitchen in or near **Odhav / Nikol / Bapunagar** can reach all three within one lunch window.
 
 **Kitchen location tips:** ground-floor shed or shop with water + drainage, within 15–20 minutes of your first 10 customers, parking for the scooter, and inside AMC limits (simpler licences).
 
@@ -32,8 +32,8 @@ Deliver in **clusters**, not all over the city. One rider can cover one cluster 
 
 Shortlist 5 units with **100+ workers** from the survey (bigger plants are usually in Naroda and Vatva). Ask the owner/HR in Gujarati:
 
-> *"સાહેબ, અમે ઘરે બનાવેલું ટિફિન ફેક્ટરીના ગેટ પર ₹60 માં આપીએ છીએ. તમારા એક વિભાગના 30 કામદારોને એક દિવસ મફત જમાડવાની પરવાનગી આપશો?"*
-> (Sir, we deliver home-made tiffin at the factory gate for ₹60. Will you allow us to feed 30 workers of one department free for one day?)
+> *"સાહેબ, અમે ઘરે બનાવેલું ટિફિન ફેક્ટરીના ગેટ પર ₹80 માં આપીએ છીએ. તમારા એક વિભાગના 30 કામદારોને એક દિવસ મફત જમાડવાની પરવાનગી આપશો?"*
+> (Sir, we deliver home-made tiffin at the factory gate for ₹80. Will you allow us to feed 30 workers of one department free for one day?)
 
 ## 4. Local marketing in Ahmedabad / स्थानीय प्रचार
 
@@ -54,8 +54,8 @@ Shortlist 5 units with **100+ workers** from the survey (bigger plants are usual
 
 4 તવા રોટલી • ભાત • દાળ ફ્રાય • મિક્સ વેજ / પનીર શાક • સલાડ
 
-રોજનું ટિફિન ................ ₹60
-માસિક પ્લાન (26 દિવસ) ....... ₹1,599
+રોજનું ટિફિન ................ ₹80
+માસિક પ્લાન (26 દિવસ) ....... ₹2,100
 20+ ટિફિન પર બલ્ક ભાવ ....... ₹55
 
 લંચ બેલ પહેલાં ગેટ પર • શુદ્ધ શાકાહારી

@@ -7,11 +7,11 @@ import { SLOGAN } from "@/lib/i18n";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Grihasth Bhojnam by Sachin — ₹60 Ghar Jaisa Tiffin | Factory Tiffin Delivery in Ahmedabad",
+    default: "Grihasth Bhojnam by Sachin — ₹80 Ghar Jaisa Tiffin | Factory Tiffin Delivery in Ahmedabad",
     template: "%s | Grihasth Bhojnam",
   },
   description:
-    "Sasta monthly tiffin & daily tiffin service for factories and workers in Ahmedabad — Naroda, Odhav, Vatva, Kathwada GIDC & Changodar. 4 tawa roti, rice, dal fry, sabji, salad — ₹60 daily, ₹1599 monthly. " +
+    "Sasta monthly tiffin & daily tiffin service for factories and workers in Ahmedabad — Naroda, Odhav, Vatva, Kathwada GIDC & Changodar. 4 tawa roti, rice, dal fry, sabji, salad — ₹80 daily, ₹2100 monthly. " +
     SLOGAN.en,
   keywords: SEO_KEYWORDS,
   applicationName: "Grihasth Bhojnam",
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     type: "website",
     siteName: "Grihasth Bhojnam",
     title: "Grihasth Bhojnam — ghar jaisa tiffin at your factory gate",
-    description: "₹60 daily thali, ₹1599 monthly plan. " + SLOGAN.hi,
+    description: "₹80 daily thali, ₹2100 monthly plan. " + SLOGAN.hi,
     locale: "hi_IN",
     alternateLocale: ["en_IN"],
     images: [{ url: "/og.png", width: 1200, height: 630 }],

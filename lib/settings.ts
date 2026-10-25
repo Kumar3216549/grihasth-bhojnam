@@ -2,11 +2,11 @@ import { db } from "./db";
 
 /** Every value the owner can change from /admin/settings. Defaults are used until saved. */
 export const SETTING_DEFAULTS = {
-  dailyPrice: "60",
-  paneerPrice: "75",
-  monthlyPrice: "1599",
+  dailyPrice: "80",
+  paneerPrice: "95",
+  monthlyPrice: "2100",
   monthlyDays: "26",
-  bulkPrice: "55",
+  bulkPrice: "75",
   paneerDays: "3,6", // 0=Sun … 6=Sat → Wednesday & Saturday
   shifts: "Lunch 12:30 PM|Lunch 1:30 PM|Dinner 7:30 PM|Night shift 11:30 PM",
   orderCutoff: "10:30 AM",
@@ -29,6 +29,11 @@ export const SETTING_DEFAULTS = {
 /** Old placeholder values that may still be saved in the database from the first setup */
 const OLD_PLACEHOLDERS: Partial<Record<keyof typeof SETTING_DEFAULTS, string[]>> = {
   businessPhone: ["+91 90000 00000"],
+  // prices before the Oct 2026 change (₹80 thali, ₹2100 monthly)
+  dailyPrice: ["60"],
+  paneerPrice: ["75"],
+  monthlyPrice: ["1599"],
+  bulkPrice: ["55"],
   whatsappNumber: ["919000000000"],
 };
 
@@ -51,9 +56,9 @@ export async function getSettings(): Promise<Settings> {
 }
 
 export function prices(s: Settings) {
-  const daily = Number(s.dailyPrice) || 60;
+  const daily = Number(s.dailyPrice) || 80;
   const paneer = Number(s.paneerPrice) || daily;
-  const monthly = Number(s.monthlyPrice) || 1599;
+  const monthly = Number(s.monthlyPrice) || 2100;
   const days = Number(s.monthlyDays) || 26;
   return { daily, paneer, monthly, days, perMonthly: Math.round(monthly / days), paneerExtra: paneer - daily, bulk: Number(s.bulkPrice) || daily };
 }

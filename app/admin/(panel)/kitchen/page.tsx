@@ -25,7 +25,7 @@ export default async function KitchenPage({ searchParams }: { searchParams: { da
 
       <div className="a-card mb-6 flex flex-wrap items-center justify-between gap-6 !bg-gradient-to-r from-saffron-500 to-saffron-600 !text-white">
         <div>
-          <p className="text-sm opacity-90">{fmtDate(d)} · {menu.closed ? "Kitchen closed" : `${menu.rice === "plain" ? "Plain rice" : "Jeera rice"} · Mix veg${menu.isPaneer ? " + Paneer butter masala" : ""}`}</p>
+          <p className="text-sm opacity-90">{fmtDate(d)} · {menu.closed ? "Kitchen closed" : menu.dishes.map((d) => d.en).join(" + ")}</p>
           <p className="mt-1 text-5xl font-extrabold tabular-nums">{plan.toCook}</p>
           <p className="text-sm opacity-90">tiffins to make = {plan.total} booked + {plan.buffer} buffer ({plan.bufferPct}%)</p>
         </div>

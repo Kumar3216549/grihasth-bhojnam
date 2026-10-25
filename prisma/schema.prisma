@@ -143,7 +143,7 @@ model Order {
   upiRefAt          DateTime?
   paymentVerifiedAt DateTime?
   /// Random key sent by the order form so a double-click / refresh never creates two orders
-  clientKey         String?        @unique
+  clientKey         String?
   notes             String         @default("")
   whatsappSent      Boolean        @default(false)
   invoice           Invoice?
@@ -153,6 +153,7 @@ model Order {
 
   @@index([deliveryDate])
   @@index([status])
+  @@index([clientKey])
 }
 
 /// Monthly plan. A subscription delivers `qty` tiffins every working day between startDate and endDate.

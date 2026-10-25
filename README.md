@@ -3,7 +3,7 @@
 > **व्यापार नहीं, व्यवहार परोसते हैं हम।** — *We don't serve business, we serve relationships.*
 
 Ghar jaisa tiffin service for factories, companies and workers in **Ahmedabad's industrial areas** — Odhav, Kathwada, Naroda, Vatva GIDC, Narol, Changodar.
-**₹60 daily thali · ₹1,599 monthly plan** — 4 tawa roti, rice, dal fry, mix veg / paneer sabji, salad.
+**₹80 daily thali · ₹2,100 monthly plan** — 4 tawa roti, rice, dal fry, mix veg / paneer sabji, salad.
 
 This repo is the full website + admin system:
 
@@ -11,7 +11,7 @@ This repo is the full website + admin system:
 |---|---|
 | `/` Hero with Hindi + English slogan, plans, photos | **Dashboard** — tiffins today, stock alerts, renewals, profit |
 | `/menu` Today's menu + week rotation | **Today's Orders** — factory-wise, status, cash received, WhatsApp |
-| `/plans` Daily ₹60 / Monthly ₹1599 with Subscribe | **Tiffin Calculator** — how many to cook, rotis, raw material, what-if |
+| `/plans` Daily ₹80 / Monthly ₹2100 with Subscribe | **Tiffin Calculator** — how many to cook, rotis, raw material, what-if |
 | `/order` Quick order: COD or Razorpay (UPI / card / netbanking) | **Monthly Subscribers** — expiry reminders, pause, extend, renew |
 | `/order/success/…` WhatsApp-style confirmation | **Inventory** — atta, rice, dal, sabji, oil… stock in/out, low-stock alert |
 | `/invoice/…` Auto invoice with logo (print / save as PDF) | **Delivery Routes** — per shift, Google Maps route, send to rider |
@@ -95,7 +95,7 @@ Made with ❤️ for India's working hands. © Grihasth Bhojnam by Sachin.
 
 ## Update — Oct 2026: fixed menu, UPI prepaid, feedback
 
-- **Fixed daily menu (5 categories only):** 4 tawa roti · jeera rice / plain rice · dal fry · mix veg / paneer butter masala · salad.
+- **Thali:** 4 tawa roti · rice · dal · sabji of the day · salad. Sabji/dal follow the **Laziz weekly menu** (Mon Aloo Gobhi + Dal Fry, Tue Mix Veg + Dal Tadka, Wed Paneer Butter Masala + Dal Fry ⭐, Thu Rajma + Jeera Rice, Fri Chhole + Mix Veg, Sat Matar Paneer + Dal Fry ⭐, Sun rest day) — edit `WEEKLY` in `lib/menu.ts`; dish photos in `public/photos/week/`.
   Every meal also includes **2 packets of mukhwas** and **2 pieces of tissue paper** (shown on the menu, order summary, order page and invoice).
   Per day you only choose the rice and whether paneer butter masala is available: **/admin/settings → Menu availability**.
 - **Payments:** customers choose **Prepaid (UPI)** or **COD pre-order** (pay cash at delivery).

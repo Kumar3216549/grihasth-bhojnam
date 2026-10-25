@@ -5,6 +5,7 @@ import IncludedItems from "@/components/IncludedItems";
 import ContactSection from "@/components/ContactSection";
 import FeedbackForm from "@/components/FeedbackForm";
 import { Divider, Lotus, SectionTitle } from "@/components/Ornament";
+import WeeklyMenu from "@/components/WeeklyMenu";
 import { getDict } from "@/lib/lang";
 import { getSettings, paneerDayList, prices } from "@/lib/settings";
 import { IMAGES } from "@/lib/images";
@@ -120,6 +121,11 @@ export default async function Home() {
           <IncludedItems lang={lang} t={t} compact />
           <Link href="/menu" className="text-sm font-semibold text-leaf-700 hover:underline">{t.nav.menu} →</Link>
         </div>
+      </section>
+
+      {/* LAZIZ WEEKLY MENU */}
+      <section className="container-x mt-12">
+        <WeeklyMenu lang={lang} t={t} todayWd={menu.date.getUTCDay()} compact />
       </section>
 
       {/* INCLUDED: mukhwas + tissue */}

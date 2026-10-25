@@ -17,24 +17,27 @@ export type DishCard = {
 /** The five fixed categories, in order, with today's actual option where it varies. */
 export function dishCards(lang: Lang, t: Dict, menu: MenuDay): DishCard[] {
   const L = (d: { en: string; hi: string }) => (lang === "hi" ? d.hi : d.en);
-  const riceToday = L(menu.rice === "plain" ? DISH.plain : DISH.jeera);
-  const sabjiToday = menu.isPaneer ? fmt(t.menu.orBoth, { a: L(DISH.mixVeg), b: L(DISH.paneer) }) : L(DISH.mixVeg);
+  const hasJeera = menu.dishes.some((d) => d.key === "jeera-rice");
+  const riceToday = L(hasJeera || menu.rice === "jeera" ? DISH.jeera : DISH.plain);
+  const dalDish = menu.dishes.find((d) => d.key.startsWith("dal-"));
+  const sabjiDishes = menu.dishes.filter((d) => !d.key.startsWith("dal-") && d.key !== "jeera-rice");
+  const sabjiToday = sabjiDishes.map(L).join(" + ");
   const open = !menu.closed;
   return [
     { key: "roti", title: L(DISH.roti), desc: t.menu.desc.roti, img: IMAGES.roti, alt: t.menu.alt.roti },
     { key: "rice", title: L(DISH.rice), desc: t.menu.desc.rice, img: IMAGES.rice, alt: t.menu.alt.rice, today: open ? fmt(t.menu.todayIs, { x: riceToday }) : undefined },
-    { key: "dal", title: L(DISH.dal), desc: t.menu.desc.dal, img: IMAGES.dal, alt: t.menu.alt.dal },
+    { key: "dal", title: lang === "hi" ? "दाल" : "Dal", desc: t.menu.desc.dal, img: dalDish?.img ?? IMAGES.dal, alt: dalDish ? L(dalDish) : t.menu.alt.dal, today: open && dalDish ? fmt(t.menu.todayIs, { x: L(dalDish) }) : undefined },
     {
       key: "sabji",
-      title: L(DISH.sabji),
+      title: lang === "hi" ? "दिन की सब्ज़ी" : "Sabji of the day",
       desc: t.menu.desc.sabji,
-      img: IMAGES.mixVeg,
-      alt: t.menu.alt.mixVeg,
-      today: open ? fmt(t.menu.todayIs, { x: sabjiToday }) : undefined,
-      flip: open && menu.isPaneer
+      img: sabjiDishes[0]?.img ?? IMAGES.mixVeg,
+      alt: sabjiDishes[0] ? L(sabjiDishes[0]) : t.menu.alt.mixVeg,
+      today: open && sabjiToday ? fmt(t.menu.todayIs, { x: sabjiToday }) : undefined,
+      flip: open && sabjiDishes.length > 1
         ? [
-            { src: IMAGES.paneer, alt: t.menu.alt.paneer, label: L(DISH.paneer) },
-            { src: IMAGES.mixVeg, alt: t.menu.alt.mixVeg, label: L(DISH.mixVeg) },
+            { src: sabjiDishes[0].img, alt: L(sabjiDishes[0]), label: L(sabjiDishes[0]) },
+            { src: sabjiDishes[1].img, alt: L(sabjiDishes[1]), label: L(sabjiDishes[1]) },
           ]
         : undefined,
     },

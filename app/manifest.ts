@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "Grihasth Bhojnam by Sachin — गृहस्थ भोजनम्",
     short_name: "Grihasth Bhojnam",
-    description: "Ghar jaisa tiffin for factory workers. ₹60 daily, ₹1599 monthly. व्यापार नहीं, व्यवहार परोसते हैं हम।",
+    description: "Ghar jaisa tiffin for factory workers. ₹80 daily, ₹2100 monthly. व्यापार नहीं, व्यवहार परोसते हैं हम।",
     start_url: "/?source=pwa",
     scope: "/",
     display: "standalone",

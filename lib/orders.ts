@@ -54,7 +54,7 @@ export async function createOrder(input: OrderInputT) {
 
   // Duplicate protection: a repeated submit with the same key returns the order already created.
   if (input.clientKey) {
-    const existing = await db.order.findUnique({ where: { clientKey: input.clientKey } });
+    const existing = await db.order.findFirst({ where: { clientKey: input.clientKey } });
     if (existing) return existing;
   }
 
@@ -127,14 +127,7 @@ export async function createOrder(input: OrderInputT) {
         return order;
       });
     } catch (e) {
-      if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === "P2002") {
-        // two identical submits raced: return the one that won
-        if (input.clientKey) {
-          const won = await db.order.findUnique({ where: { clientKey: input.clientKey } });
-          if (won) return won;
-        }
-        if (attempt < 2) continue; // orderNo clash
-      }
+      if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === "P2002" && attempt < 2) continue; // orderNo clash
       throw e;
     }
   }

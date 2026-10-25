@@ -15,7 +15,7 @@
 | **Vibe** | Apne ghar jaisa. Not Swiggy/Zomato premium. *Garib aur amir — sabka bhojan.* | अपने घर जैसा। दिखावा नहीं। गरीब और अमीर — सबका भोजन। |
 | **Customer** | Factory workers, labour staff, supervisors, office staff in industrial areas. | फैक्ट्री वर्कर, लेबर स्टाफ़, सुपरवाइज़र, ऑफ़िस स्टाफ़। |
 | **Product** | One thali: 4 tawa roti + rice + dal fry + mix veg / paneer sabji + salad. | एक थाली: 4 तवा रोटी + चावल + दाल फ्राई + मिक्स वेज / पनीर + सलाद। |
-| **Price** | ₹60 daily · ₹1,599 monthly (26 days) | ₹60 रोज़ · ₹1,599 महीना (26 दिन) |
+| **Price** | ₹80 daily · ₹2,100 monthly (26 days) | ₹80 रोज़ · ₹2,100 महीना (26 दिन) |
 
 ### Visual identity / पहचान
 - **Colours:** Saffron `#F28C28` (warmth, food, Indian) · Leaf green `#1E7B3A` (pure veg, trust) · Cream white `#FFFBF3` (cleanliness). Never use black backgrounds or neon.
@@ -58,8 +58,8 @@
 | 6 | कितनी शिफ्ट चलती हैं? लंच का टाइम? — Shifts & lunch time? | Checkboxes (12–12:30, 12:30–1, 1–1:30, Night) |
 | 7 | अभी खाना कैसे होता है? — How do workers eat now? (Ghar se tiffin / Canteen / Dhaba / Thela / Kuch nahi) | Checkboxes |
 | 8 | अभी एक खाने पर कितना खर्च? — Current spend per meal? (<₹40 / ₹40–60 / ₹60–80 / ₹80+) | Multiple choice |
-| 9 | ₹60 में 4 रोटी, चावल, दाल, सब्ज़ी, सलाद — लेंगे? — Would you buy this thali at ₹60? (Haan / Shayad / Nahi) | Multiple choice |
-| 10 | मंथली प्लान ₹1,599 (26 दिन) में रुचि? — Interested in ₹1,599 monthly? | Yes/No |
+| 9 | ₹80 में 4 रोटी, चावल, दाल, सब्ज़ी, सलाद — लेंगे? — Would you buy this thali at ₹80? (Haan / Shayad / Nahi) | Multiple choice |
+| 10 | मंथली प्लान ₹2,100 (26 दिन) में रुचि? — Interested in ₹2,100 monthly? | Yes/No |
 | 11 | कंपनी खाना देती है / सब्सिडी? — Does company give food / subsidy? | Yes / No / Partly |
 | 12 | कितने वर्कर शुरू में ले सकते हैं? — How many could start? | Number |
 | 13 | फ्री सैंपल डे के लिए अनुमति देंगे? — Allow a free sample day? | Yes/No |
@@ -77,10 +77,10 @@
 3. **दिन चुनें:** मंगलवार या बुधवार (बुधवार = पनीर डे, पहली छाप अच्छी पड़ती है)। सोमवार और शनिवार नहीं।
 4. **खाना:** रोज़ वाली ही थाली दें — स्पेशल नहीं। जो सैंपल में दिखाओगे, वही रोज़ मिलना चाहिए।
 5. **समय:** लंच बेल से **15 मिनट पहले** गेट पर। समय पर पहुँचना ही सबसे बड़ा प्रचार है।
-6. **पैकिंग:** साफ़ डिब्बा, ढक्कन पर स्टिकर — लोगो + "₹60 / ₹1599 मंथली" + WhatsApp नंबर + QR कोड (वेबसाइट /order)।
+6. **पैकिंग:** साफ़ डिब्बा, ढक्कन पर स्टिकर — लोगो + "₹80 / ₹2100 मंथली" + WhatsApp नंबर + QR कोड (वेबसाइट /order)।
 7. **टीम:** 2 लोग — एक बाँटे, एक फ़ीडबैक ले। सैफ़रन टी-शर्ट, कैप, ग्लव्स।
 8. **फ़ीडबैक कार्ड:** "स्वाद कैसा लगा? 😊 😐 ☹️ — रोज़ लेंगे? हाँ / नहीं — नाम + मोबाइल"।
-9. **उसी दिन ऑफ़र:** "आज साइन-अप करें तो **पहले हफ़्ते ₹50 प्रति टिफ़िन**" या "मंथली पर 2 दिन एक्स्ट्रा"।
+9. **उसी दिन ऑफ़र:** "आज साइन-अप करें तो **पहले हफ़्ते ₹70 प्रति टिफ़िन**" या "मंथली पर 2 दिन एक्स्ट्रा"।
 10. **फ़ॉलो-अप:** उसी शाम सबको WhatsApp पर धन्यवाद + मेन्यू + ऑर्डर लिंक। 3 दिन बाद HR से मिलें — बल्क डील की बात।
 
 **Budget:** 5 factories × 35 tiffins × ~₹35 cost ≈ **₹6,000** + stickers/feedback cards ₹1,000.
@@ -102,8 +102,8 @@ Put posters on factory **notice boards**, at **gates**, chai stalls, bus stops a
 │   🫓 4 तवा रोटी  🍚 चावल  🥣 दाल फ्राई │
 │   🥘 मिक्स वेज / पनीर  🥗 सलाद         │
 │                                      │
-│   रोज़ का टिफ़िन        सिर्फ़ ₹60     │
-│   ★ मंथली प्लान    ₹1,599 / 26 दिन ★  │
+│   रोज़ का टिफ़िन        सिर्फ़ ₹80     │
+│   ★ मंथली प्लान    ₹2,100 / 26 दिन ★  │
 │     (सिर्फ़ ₹61 रोज़, पनीर हफ़्ते में 2 बार) │
 │                                      │
 │   ⏰ लंच बेल से पहले गेट पर डिलीवरी    │
@@ -124,8 +124,8 @@ Home-style food, now at your factory gate!
 
 4 Tawa Roti • Rice • Dal Fry • Mix Veg / Paneer • Salad
 
-Daily tiffin ............ just ₹60
-★ Monthly plan ₹1,599 for 26 days ★
+Daily tiffin ............ just ₹80
+★ Monthly plan ₹2,100 for 26 days ★
 (about ₹61 a day — paneer twice a week)
 
 Delivered before the lunch bell • Pure veg • Less oil
@@ -137,13 +137,13 @@ We don't serve business, we serve relationships.
 **Design notes:** saffron header band, cream background, green price badge, real thali photo at least 40% of the poster, Hindi text big enough to read from 2 metres (headline ≥ 90 pt on A3). Print 100 × A4 + 20 × A3.
 
 #### Pamphlet (A5, both sides)
-- **Front (हिंदी):** "₹60 में भरपेट घर का खाना?" — थाली की फ़ोटो — "हाँ! गृहस्थ भोजनम् लाया है फैक्ट्री गेट पर रोज़ ताज़ा टिफ़िन।" — price + QR.
+- **Front (हिंदी):** "₹80 में भरपेट घर का खाना?" — थाली की फ़ोटो — "हाँ! गृहस्थ भोजनम् लाया है फैक्ट्री गेट पर रोज़ ताज़ा टिफ़िन।" — price + QR.
 - **Back (English + details):** weekly menu table · shift times · "First tiffin free for new monthly customers" coupon (code **GHAR1**) · cut-out referral slip (see Day 61–90).
 - Print 2,000 pamphlets; distribute at gates during shift change (7:30–8:30 AM), 500 per area.
 
 **Campaign offers (pick one at a time):**
-- **"पहला हफ़्ता ₹50"** — first 6 tiffins at ₹50 for new daily customers.
-- **"मंथली लो, 2 दिन एक्स्ट्रा"** — 28 days for ₹1,599 if paid before the 5th of the month.
+- **"पहला हफ़्ता ₹70"** — first 6 tiffins at ₹70 for new daily customers.
+- **"मंथली लो, 2 दिन एक्स्ट्रा"** — 28 days for ₹2,100 if paid before the 5th of the month.
 - **Team offer** — 10 workers from same factory on monthly → supervisor's tiffin free.
 
 **Target by Day 60:** 60 monthly subscribers + 40 daily customers + 1 bulk factory deal.
@@ -169,7 +169,7 @@ We don't serve business, we serve relationships.
 ```
 
 **WhatsApp referral message (customers forward this):**
-> नमस्ते 🙏 मैं रोज़ गृहस्थ भोजनम् का टिफ़िन खाता हूँ — 4 तवा रोटी, दाल, चावल, सब्ज़ी, सलाद सिर्फ़ ₹60 में, गेट पर समय से। मेरा नंबर रेफ़रल में डालना: 98XXXXXXXX. ऑर्डर: [website]/order
+> नमस्ते 🙏 मैं रोज़ गृहस्थ भोजनम् का टिफ़िन खाता हूँ — 4 तवा रोटी, दाल, चावल, सब्ज़ी, सलाद सिर्फ़ ₹80 में, गेट पर समय से। मेरा नंबर रेफ़रल में डालना: 98XXXXXXXX. ऑर्डर: [website]/order
 
 **Target by Day 90:** 150 monthly subscribers (≈150–180 tiffins/day), 3 bulk factory contracts, break-even crossed.
 
@@ -194,7 +194,7 @@ We don't serve business, we serve relationships.
 > मैं सचिन, **गृहस्थ भोजनम्** से। हम [एरिया का नाम] की फैक्ट्रियों में **घर जैसा शुद्ध शाकाहारी टिफ़िन** पहुँचाते हैं।
 >
 > 🍱 **एक थाली:** 4 तवा रोटी, चावल, दाल फ्राई, मिक्स वेज / पनीर सब्ज़ी, सलाद
-> 💰 **₹60 रोज़** | **₹1,599 महीना (26 दिन)**
+> 💰 **₹80 रोज़** | **₹2,100 महीना (26 दिन)**
 > 🏭 20+ टिफ़िन पर **बल्क रेट** और कंपनी के नाम GST बिल
 > ⏰ आपकी शिफ्ट के हिसाब से, लंच बेल से पहले गेट पर
 > ✅ एक दिन का **फ्री सैंपल** — आपके स्टाफ़ के लिए
@@ -205,31 +205,31 @@ We don't serve business, we serve relationships.
 > *व्यापार नहीं, व्यवहार परोसते हैं हम।*
 
 **English version:**
-> Namaste Sir/Madam 🙏 I'm Sachin from **Grihasth Bhojnam**. We deliver home-style pure-veg tiffins to factories in [area] — 4 tawa roti, rice, dal fry, sabji/paneer and salad. **₹60 daily, ₹1,599 monthly.** Bulk rates for 20+ tiffins, GST invoice for the company, delivered at your shift time. May we offer your team one **free sample lunch**? 📲 [number]
+> Namaste Sir/Madam 🙏 I'm Sachin from **Grihasth Bhojnam**. We deliver home-style pure-veg tiffins to factories in [area] — 4 tawa roti, rice, dal fry, sabji/paneer and salad. **₹80 daily, ₹2,100 monthly.** Bulk rates for 20+ tiffins, GST invoice for the company, delivered at your shift time. May we offer your team one **free sample lunch**? 📲 [number]
 
 ### 2. Factory gate poster text (short, big letters)
 
 **हिंदी:**
-> # ₹60 में घर का खाना
+> # ₹80 में घर का खाना
 > ## 4 रोटी • दाल • चावल • सब्ज़ी • सलाद
 > ### रोज़ गेट पर, लंच से पहले
-> ### मंथली ₹1,599 · WhatsApp 9XXXXXXXXX
+> ### मंथली ₹2,100 · WhatsApp 9XXXXXXXXX
 > *व्यापार नहीं, व्यवहार परोसते हैं हम।*
 
 **English:**
-> # Home food for ₹60
+> # Home food for ₹80
 > ## 4 Roti • Dal • Rice • Sabji • Salad
-> ### At your gate, before lunch — Monthly ₹1,599
+> ### At your gate, before lunch — Monthly ₹2,100
 > *We don't serve business, we serve relationships.*
 
-### 3. Five Reels scripts / 5 रील स्क्रिप्ट — "₹60 में घर जैसा खाना?"
+### 3. Five Reels scripts / 5 रील स्क्रिप्ट — "₹80 में घर जैसा खाना?"
 
-All reels: 20–30 sec, vertical 9:16, Hindi voice-over, Hindi + English subtitles, end card = logo + ₹60/₹1599 + WhatsApp. Use real kitchen, real workers (take written permission). Post 7–9 PM.
+All reels: 20–30 sec, vertical 9:16, Hindi voice-over, Hindi + English subtitles, end card = logo + ₹80/₹2100 + WhatsApp. Use real kitchen, real workers (take written permission). Post 7–9 PM.
 
-**Reel 1 — "₹60 में क्या मिलेगा?" (Hook: price shock)**
+**Reel 1 — "₹80 में क्या मिलेगा?" (Hook: price shock)**
 | Time | Visual | Voice / Text |
 |---|---|---|
-| 0–3s | Close-up: hand puts ₹50 note + ₹10 coin on steel thali | "₹60 में क्या मिलता है आजकल?" |
+| 0–3s | Close-up: hand puts ₹50 note + ₹10 coin on steel thali | "₹80 में क्या मिलता है आजकल?" |
 | 3–12s | Fast cuts: roti puffing on tawa → dal tadka sizzle → rice steam → sabji → salad cut | "4 तवा रोटी… दाल फ्राई… चावल… सब्ज़ी… सलाद!" |
 | 12–20s | Full thali top shot, slow push-in | "पूरी थाली — घर जैसी।" |
 | 20–25s | Delivery at factory gate, worker smiles | "फैक्ट्री गेट पर, लंच से पहले। गृहस्थ भोजनम्।" |
@@ -243,7 +243,7 @@ All reels: 20–30 sec, vertical 9:16, Hindi voice-over, Hindi + English subtitl
 **Reel 3 — "Canteen vs Ghar ka tiffin" (respectful comparison — no names)**
 - Split screen. Left: worker standing in long queue, checking watch. Right: tiffin already at gate, worker sitting with friends.
 - Text: "लाइन में 20 मिनट? या गेट पर गरम टिफ़िन?"
-- End: "मंथली सिर्फ़ ₹1,599 — रोज़ ₹61 पड़ता है।"
+- End: "मंथली सिर्फ़ ₹2,100 — रोज़ ₹61 पड़ता है।"
 
 **Reel 4 — "Worker की ज़ुबानी" (testimonial, real)**
 - Worker in uniform (permission taken) sits on bench with tiffin: "मैं 3 महीने से ले रहा हूँ। रोटी नरम, दाल गाढ़ी, और कभी लेट नहीं हुआ।"
@@ -307,9 +307,9 @@ Paneer tiffin: +60 g paneer (≈ ₹21.6), less sabji → **≈ ₹50**.
 ### Price ladder
 | Plan | Price | Per tiffin | Gross margin |
 |---|---|---|---|
-| Daily Veg Thali | ₹60 | ₹60 | ≈ ₹27 |
+| Daily Veg Thali | ₹80 | ₹80 | ≈ ₹27 |
 | Paneer Special (daily, 2×/week) | ₹75 | ₹75 | ≈ ₹25 |
-| **Monthly (26 days, paneer 2×/week included)** | **₹1,599** | **₹61.5** | ≈ ₹20 (blended, 2 paneer days) |
+| **Monthly (26 days, paneer 2×/week included)** | **₹2,100** | **₹61.5** | ≈ ₹20 (blended, 2 paneer days) |
 | Bulk 20+ (company contract) | ₹55 | ₹55 | ≈ ₹22 + no marketing cost |
 
 ### Fixed monthly costs (example at 150 tiffins/day)
@@ -322,7 +322,7 @@ Paneer tiffin: +60 g paneer (≈ ₹21.6), less sabji → **≈ ₹50**.
 | **Total fixed** | **≈ 60,000** |
 
 - Gross margin ≈ ₹24 × 150 × 26 days ≈ **₹93,600**
-- Minus fixed ₹60,000 → **profit ≈ ₹33,600 / month**
+- Minus fixed ₹80,000 → **profit ≈ ₹33,600 / month**
 - **Break-even ≈ 96 tiffins/day** (60,000 ÷ 24 ÷ 26). Below 60/day, keep it as a home-kitchen with family help.
 
 ### 10 rules to stay cheap *and* profitable / 10 नियम
@@ -353,7 +353,7 @@ Paneer tiffin: +60 g paneer (≈ ₹21.6), less sabji → **≈ ₹50**.
 | 1 | "आज का मेन्यू" + kitchen timelapse | Weekly menu card | Renewal reminders (Admin → Subscribers) |
 | 2 | Customer testimonial | Paneer day photo | 1 new factory visit/day |
 | 3 | Reel challenge (Reel 5 format) | Referral leaderboard | Pamphlets in a new area |
-| 4 | "₹60 me kya milta hai" cost breakdown | Next month offer | HR meeting with 2 bulk prospects |
+| 4 | "₹80 me kya milta hai" cost breakdown | Next month offer | HR meeting with 2 bulk prospects |
 
 **Festival hooks:** Diwali sweet in tiffin · Holi gujiya · Republic Day "Desh ke nirmaataon ko salaam" · Labour Day (1 May) — *"मेहनत करने वालों को हमारा सलाम — आज सबको खीर।"*
 

@@ -13,7 +13,7 @@ import { SLOGAN } from "@/lib/i18n";
 export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Order Tiffin — UPI Prepaid or COD Pre-order",
-  description: "Order daily tiffin (₹60) or monthly tiffin (₹1599) for your factory or company. Prepay by UPI or pre-book with cash on delivery.",
+  description: "Order daily tiffin (₹80) or monthly tiffin (₹2100) for your factory or company. Prepay by UPI or pre-book with cash on delivery.",
   alternates: { canonical: "/order" },
 };
 

@@ -91,8 +91,8 @@ export default async function SettingsPage({ searchParams }: { searchParams: { o
       <section className="a-card mt-8">
         <h2 className="font-semibold">🍛 Menu availability for the next 7 days</h2>
         <p className="mb-3 text-xs text-stone-500">
-          The menu is fixed (4 tawa roti · rice · dal fry · mix veg / paneer butter masala · salad, plus 2 mukhwas + 2 tissue).
-          Only choose which rice is cooked and whether paneer butter masala is available. ↺ = back to the default settings.
+          Sabji and dal follow the Laziz weekly menu (lib/menu.ts → WEEKLY). Every thali has 4 tawa roti · rice · dal · sabji · salad + 2 mukhwas + 2 tissue.
+          Here you can choose the rice and switch the Paneer Special on/off for a date. ↺ = back to the default settings.
         </p>
         <div className="space-y-2">
           {week.map((d) => (
@@ -103,7 +103,7 @@ export default async function SettingsPage({ searchParams }: { searchParams: { o
                 <option value="jeera">Jeera rice</option>
                 <option value="plain">Plain rice</option>
               </select>
-              <label className="flex items-center gap-1.5 text-sm"><input type="checkbox" name="isPaneer" defaultChecked={d.isPaneer} /> Paneer butter masala available</label>
+              <label className="flex items-center gap-1.5 text-sm"><input type="checkbox" name="isPaneer" defaultChecked={d.isPaneer} /> Paneer Special</label>
               <span className="flex gap-1">
                 <button className="a-btn-ghost !py-1.5 text-xs">Save</button>
                 <button name="reset" value="1" className="a-btn-ghost !py-1.5 text-xs" title="Back to default rotation">↺</button>
