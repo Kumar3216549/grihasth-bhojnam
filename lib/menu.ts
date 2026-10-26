@@ -7,7 +7,14 @@ import { addDays, weekday } from "./dates";
  * A saved DailyMenu row (from /admin/settings) wins; otherwise the settings decide.
  */
 export type RiceType = "jeera" | "plain";
-export type MenuDay = { date: Date; isPaneer: boolean; rice: RiceType; closed: boolean; dishes: WeekDish[] };
+export type MenuDay = { date: Date; isPaneer: boolean; rice: RiceType; closed: boolean; dishes: WeekDish[]; customEn: string; customHi: string };
+
+/** Today's dish name: the admin's custom name if set, else the weekly menu dishes. */
+export function dishLabel(m: MenuDay, lang: "hi" | "en") {
+  const custom = lang === "hi" ? m.customHi || m.customEn : m.customEn || m.customHi;
+  if (custom) return custom;
+  return m.dishes.map((d) => (lang === "hi" ? d.hi : d.en)).join(" + ");
+}
 
 /* ---------- Laziz weekly menu (the day's sabji / dal, served with the fixed thali) ---------- */
 export type WeekDish = { key: string; en: string; hi: string; emoji: string; img: string };
@@ -42,9 +49,9 @@ export async function getMenu(date: Date, paneerDays: number[], defaultRice: str
   const fallbackRice = asRice(defaultRice, "jeera");
   try {
     const row = await db.dailyMenu.findUnique({ where: { date } });
-    if (row) return { date, isPaneer: row.isPaneer && !closed, rice: asRice(row.riceType, fallbackRice), closed, dishes: WEEKLY[weekday(date)].dishes };
+    if (row) return { date, isPaneer: row.isPaneer && !closed, rice: asRice(row.riceType, fallbackRice), closed, dishes: WEEKLY[weekday(date)].dishes, customEn: row.noteEn, customHi: row.noteHi };
   } catch {}
-  return { date, isPaneer: paneerDays.includes(weekday(date)) && !closed, rice: fallbackRice, closed, dishes: WEEKLY[weekday(date)].dishes };
+  return { date, isPaneer: paneerDays.includes(weekday(date)) && !closed, rice: fallbackRice, closed, dishes: WEEKLY[weekday(date)].dishes, customEn: "", customHi: "" };
 }
 
 export async function getWeekMenu(start: Date, paneerDays: number[], defaultRice?: string) {

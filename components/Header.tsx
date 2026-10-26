@@ -19,11 +19,11 @@ export default function Header({ lang, t }: { lang: Lang; t: Dict }) {
             <Link key={l.href} href={l.href} className="text-sm font-medium text-ink/80 hover:text-saffron-700">{l.label}</Link>
           ))}
           <LangToggle lang={lang} label={t.langToggle} aria={t.a11y.lang} />
-          <Link href="/order" className="btn-primary !py-2">{t.nav.order}</Link>
+          <Link href="/thali" className="btn-primary !py-2">{t.quick.cta}</Link>
         </nav>
         <div className="flex items-center gap-2 md:hidden">
           <LangToggle lang={lang} label={t.langToggle} aria={t.a11y.lang} />
-          <MobileNav openLabel={t.a11y.openMenu} closeLabel={t.a11y.closeMenu} links={[{ href: "/", label: t.nav.home }, ...links, { href: "/order", label: t.nav.order }]} />
+          <MobileNav openLabel={t.a11y.openMenu} closeLabel={t.a11y.closeMenu} links={[{ href: "/", label: t.nav.home }, ...links, { href: "/thali", label: t.quick.cta }, { href: "/order", label: t.nav.order }]} />
         </div>
       </div>
     </header>

@@ -6,7 +6,7 @@ import { cleanPhone, slugify } from "./format";
 import { getSettings, paneerDayList, prices, shiftList, upiReady } from "./settings";
 import { orderMessage, sendWhatsApp, shiftTime } from "./whatsapp";
 import { SITE_URL } from "./site";
-import { isPaneerOn } from "./menu";
+import { dishLabel, getMenu, isPaneerOn } from "./menu";
 
 export const OrderInput = z.object({
   name: z.string().trim().min(2).max(80),
@@ -62,6 +62,8 @@ export async function createOrder(input: OrderInputT) {
   if (input.planType === "MONTHLY") thaliType = "VEG"; // paneer days are included automatically
   if (thaliType === "PANEER" && !(await isPaneerOn(date, paneerDayList(s)))) throw new OrderError("Paneer butter masala is not available on this date", "paneer");
 
+  const dayMenu = await getMenu(date, paneerDayList(s), s.riceType);
+  const dishName = input.planType === "MONTHLY" ? "Monthly plan" : (dishLabel(dayMenu, "en") || "Veg Thali") + (thaliType === "PANEER" ? " (Paneer Special)" : "");
   const unitPrice = input.planType === "MONTHLY" ? p.monthly : thaliType === "PANEER" ? p.paneer : p.daily;
   const amount = unitPrice * input.qty;
 
@@ -108,6 +110,7 @@ export async function createOrder(input: OrderInputT) {
             paymentMethod: input.paymentMethod,
             notes: input.notes,
             clientKey: input.clientKey,
+            dishName,
           },
         });
         if (input.planType === "MONTHLY") {

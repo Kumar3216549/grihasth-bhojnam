@@ -6,7 +6,7 @@ import { requireAdmin } from "@/lib/auth";
 import { dbDate, endAfterWorkingDays, todayDb, ymdIST, addDays } from "@/lib/dates";
 import { getDayPlan } from "@/lib/kitchen";
 import { createOrder, ensureInvoice, invoiceUrl, markPaid, OrderError, OrderInput } from "@/lib/orders";
-import { SETTING_DEFAULTS, getSettings, prices } from "@/lib/settings";
+import { SETTING_DEFAULTS, getSettings, paneerDayList, prices } from "@/lib/settings";
 import { sendWhatsApp } from "@/lib/whatsapp";
 import { slugify } from "@/lib/format";
 
@@ -88,13 +88,60 @@ export async function addPhoneOrder(f: FormData) {
     paymentMethod: "COD",
   });
   if (!parsed.success) redirect("/admin/orders?error=" + encodeURIComponent("Check the form: " + parsed.error.issues.map((i) => i.path.join(".")).join(", ")));
+  let token = "";
   try {
-    await createOrder(parsed.data);
+    token = (await createOrder(parsed.data)).publicToken;
   } catch (e) {
     redirect("/admin/orders?error=" + encodeURIComponent(e instanceof OrderError ? e.message : "Could not save order"));
   }
   revalidatePath("/admin", "layout");
-  redirect(`/admin/orders?date=${parsed.data.date}&ok=1`);
+  redirect(`/admin/scan?c=${token}&new=1`);
+}
+
+/* ---------------- Counter: today's dish, payment, QR collection ---------------- */
+
+/** Admin sets today's dish name (shown on the website) and the thali price. */
+export async function saveTodayDish(f: FormData) {
+  await requireAdmin();
+  const date = todayDb();
+  const s = await getSettings();
+  const data = { noteEn: str(f, "customEn"), noteHi: str(f, "customHi") };
+  await db.dailyMenu.upsert({
+    where: { date },
+    create: { date, sabjiEn: "", sabjiHi: "", isPaneer: paneerDayList(s).includes(date.getUTCDay()), riceType: "", ...data },
+    update: data,
+  });
+  const price = numv(f, "dailyPrice");
+  if (price > 0) await db.setting.upsert({ where: { key: "dailyPrice" }, create: { key: "dailyPrice", value: String(price) }, update: { value: String(price) } });
+  revalidatePath("/", "layout");
+  redirect("/admin/counter?ok=1");
+}
+
+export async function setPaymentStatus(f: FormData) {
+  await requireAdmin();
+  const id = str(f, "id");
+  if (str(f, "paid") === "1") {
+    await db.order.update({ where: { id }, data: { paymentStatus: "PAID", paymentVerifiedAt: new Date() } });
+    await ensureInvoice(id);
+  } else {
+    await db.order.update({ where: { id }, data: { paymentStatus: "PENDING", paymentVerifiedAt: null } });
+  }
+  revalidatePath("/admin", "layout");
+  const back = str(f, "back");
+  if (back) redirect(back);
+}
+
+/** Hand over the meal. Works only once per QR: a second scan shows "already collected". */
+export async function collectOrder(f: FormData) {
+  await requireAdmin();
+  const id = str(f, "id");
+  await db.order.updateMany({
+    where: { id, collectedAt: null, status: { not: "CANCELLED" } },
+    data: { collectedAt: new Date(), status: "DELIVERED" },
+  });
+  revalidatePath("/admin", "layout");
+  const back = str(f, "back");
+  if (back) redirect(back);
 }
 
 /* ---------------- Subscriptions ---------------- */
@@ -283,8 +330,8 @@ export async function saveMenu(f: FormData) {
       riceType,
       sabjiEn: isPaneer ? "Mix Veg / Paneer Butter Masala" : "Mix Veg",
       sabjiHi: isPaneer ? "मिक्स वेज / पनीर बटर मसाला" : "मिक्स वेज",
-      noteEn: "",
-      noteHi: "",
+      noteEn: str(f, "customEn"),
+      noteHi: str(f, "customHi"),
     };
     await db.dailyMenu.upsert({ where: { date }, create: { date, ...data }, update: data });
   }

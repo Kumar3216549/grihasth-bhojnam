@@ -104,6 +104,8 @@ export default async function SettingsPage({ searchParams }: { searchParams: { o
                 <option value="plain">Plain rice</option>
               </select>
               <label className="flex items-center gap-1.5 text-sm"><input type="checkbox" name="isPaneer" defaultChecked={d.isPaneer} /> Paneer Special</label>
+              <input name="customEn" defaultValue={d.customEn} className="a-input sm:col-span-2" placeholder={`Dish name (blank = ${d.dishes.map((x) => x.en).join(" + ") || "closed"})`} />
+              <input name="customHi" defaultValue={d.customHi} className="a-input font-hindi sm:col-span-2" placeholder="व्यंजन का नाम (हिंदी)" />
               <span className="flex gap-1">
                 <button className="a-btn-ghost !py-1.5 text-xs">Save</button>
                 <button name="reset" value="1" className="a-btn-ghost !py-1.5 text-xs" title="Back to default rotation">↺</button>

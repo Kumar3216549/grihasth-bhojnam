@@ -144,6 +144,10 @@ model Order {
   paymentVerifiedAt DateTime?
   /// Random key sent by the order form so a double-click / refresh never creates two orders
   clientKey         String?
+  /// Dish of the day when the order was placed (e.g. "Rajma + Jeera Rice")
+  dishName          String         @default("")
+  /// Set once when the meal is handed over at the counter (QR scan). Prevents a second collection.
+  collectedAt       DateTime?
   notes             String         @default("")
   whatsappSent      Boolean        @default(false)
   invoice           Invoice?

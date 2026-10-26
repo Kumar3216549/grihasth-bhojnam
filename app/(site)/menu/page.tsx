@@ -66,7 +66,7 @@ export default async function MenuPage() {
           {today.isPaneer && <> · {t.menu.paneerThali} ₹{p.paneer}</>}
           {" · "}{t.menu.monthly} ₹{p.monthly.toLocaleString("en-IN")}
         </p>
-        <Link href="/order" className="btn bg-white text-saffron-700 hover:bg-saffron-50">{t.nav.order}</Link>
+        <Link href="/thali" className="btn bg-white text-saffron-700 hover:bg-saffron-50">{t.quick.cta}</Link>
       </div>
     </div>
   );

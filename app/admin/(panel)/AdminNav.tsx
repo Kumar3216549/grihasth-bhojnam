@@ -6,6 +6,7 @@ import { useState } from "react";
 
 const NAV = [
   { href: "/admin", label: "Dashboard", hi: "डैशबोर्ड", icon: "📊" },
+  { href: "/admin/counter", label: "Counter & QR Scan", hi: "काउंटर · QR स्कैन", icon: "📷" },
   { href: "/admin/orders", label: "Today's Orders", hi: "आज के ऑर्डर", icon: "🧾" },
   { href: "/admin/kitchen", label: "Tiffin Calculator", hi: "टिफ़िन गिनती", icon: "🍱" },
   { href: "/admin/subscribers", label: "Monthly Subscribers", hi: "मंथली ग्राहक", icon: "👥" },

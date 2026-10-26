@@ -5,12 +5,14 @@ import { db } from "@/lib/db";
 import { getDict } from "@/lib/lang";
 import { fmt } from "@/lib/i18n";
 import { fmtDate } from "@/lib/dates";
-import { shiftTime, orderMessage } from "@/lib/whatsapp";
+import { shiftTime } from "@/lib/whatsapp";
 import { getSettings, upiReady } from "@/lib/settings";
 import { DISH } from "@/lib/menu";
 import { includedItems } from "@/lib/menuView";
 import { Divider } from "@/components/Ornament";
 import UpiPayPanel from "./UpiPayPanel";
+import QrCode from "@/components/QrCode";
+import { SITE_URL } from "@/lib/site";
 
 export const dynamic = "force-dynamic";
 export const metadata: Metadata = { title: "Your order", robots: { index: false } };
@@ -36,7 +38,9 @@ export default async function Success({ params }: { params: { token: string } })
   }[state];
   const payLabel = paid ? t.success.pay.paid : o.paymentMethod === "COD" ? t.success.pay.cod : isUpi ? (o.upiRef ? t.success.pay.upiVerifying : t.success.pay.upiWaiting) : t.success.pay.online;
   const thali = o.thaliType === "PANEER" ? t.order.paneer : t.order.veg;
-  const waText = orderMessage(o);
+  const pageLink = `${SITE_URL}/order/success/${o.publicToken}`;
+  const waText = fmt(t.qr.waMsg, { orderNo: o.orderNo, name: o.customerName, qty: o.qty, dish: o.dishName || "-", company: o.companyName, address: o.address || o.areaName, time: o.shift, link: pageLink });
+  const qrValue = `${SITE_URL}/admin/scan?c=${o.publicToken}`;
 
   return (
     <div className="container-x max-w-xl py-14 text-center">
@@ -44,6 +48,21 @@ export default async function Success({ params }: { params: { token: string } })
       <h1 className="mt-5 text-3xl font-extrabold text-earth-800">{head.title}</h1>
       {head.msg && <p className="mt-3 text-lg">{head.msg}</p>}
       <Divider className="mt-4" />
+
+      {!cancelled && o.planType === "DAILY" && (
+        <div className="mt-8">
+          {o.collectedAt ? (
+            <p className="rounded-xl bg-leaf-50 p-4 text-lg font-bold text-leaf-800">{t.qr.collected}</p>
+          ) : (
+            <>
+              <p className="mb-4 rounded-xl bg-saffron-50 p-4 text-base font-semibold text-earth-800">{t.qr.thanks}</p>
+              <QrCode value={qrValue} label={t.qr.alt} />
+              <p className="mt-2 text-sm font-semibold">{o.orderNo}</p>
+              <p className="text-xs text-ink/60">{t.qr.save}</p>
+            </>
+          )}
+        </div>
+      )}
 
       {isUpi && !paid && !cancelled && (
         upiReady(s) ? (
@@ -69,6 +88,7 @@ export default async function Success({ params }: { params: { token: string } })
           [t.success.plan, `${o.planType === "MONTHLY" ? t.success.monthlyLabel : `${t.success.dailyLabel} · ${thali}`} × ${o.qty}`],
           [t.success.date, o.subscription ? `${fmtDate(o.subscription.startDate, lang)} → ${fmtDate(o.subscription.endDate, lang)}` : fmtDate(o.deliveryDate, lang)],
           [t.success.shift, o.shift],
+          [t.quick.todayDish, o.dishName || "-"],
           [t.success.total, `₹${amount}`],
           [t.success.payment, payLabel],
         ].map(([k, v]) => (
@@ -83,7 +103,7 @@ export default async function Success({ params }: { params: { token: string } })
 
       <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
         {o.invoice && <Link href={`/invoice/${o.publicToken}`} className="btn-primary">🧾 {t.success.invoice}</Link>}
-        <a href={`https://wa.me/${s.whatsappNumber}?text=${encodeURIComponent(waText)}`} target="_blank" rel="noopener" className="btn-green">💬 {t.success.whatsapp}</a>
+        <a href={`https://wa.me/${s.whatsappNumber}?text=${encodeURIComponent(waText)}`} target="_blank" rel="noopener" className="btn-green">💬 {t.qr.sendWa}</a>
         <Link href="/" className="btn-ghost">{t.success.home}</Link>
       </div>
     </div>

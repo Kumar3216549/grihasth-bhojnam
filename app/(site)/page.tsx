@@ -54,7 +54,7 @@ export default async function Home() {
             <p className="mt-3 max-w-xl text-base text-ink/70">{t.hero.sub}</p>
 
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/order" className="btn-primary px-7 py-3.5 text-base">{t.hero.ctaOrder} →</Link>
+              <Link href="/thali" className="btn-primary px-7 py-3.5 text-base">🍽️ {t.quick.cta} →</Link>
               <Link href="/plans" className="btn-ghost px-7 py-3.5 text-base">{t.hero.ctaPlans}</Link>
             </div>
 
