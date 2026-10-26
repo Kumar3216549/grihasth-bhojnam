@@ -1,3 +1,4 @@
+import { SITE_URL } from "./site";
 /**
  * WhatsApp auto-messages through the official WhatsApp Business Cloud API (Meta).
  * - Set WHATSAPP_TOKEN + WHATSAPP_PHONE_NUMBER_ID to enable.
@@ -18,8 +19,10 @@ export function shiftTime(shift: string) {
   return shift.match(/\d{1,2}:\d{2}\s?[AP]M/i)?.[0] ?? shift;
 }
 
-export function orderMessage(o: { customerName: string; shift: string; companyName: string; orderNo: string }, invoiceUrl?: string) {
+export function orderMessage(o: { customerName: string; shift: string; companyName: string; orderNo: string; publicToken?: string; qty?: number; dishName?: string }, invoiceUrl?: string) {
   let m = `Namaste ${o.customerName}, aapka tiffin ${shiftTime(o.shift)} par ${o.companyName} me pahuch jayega. 🙏\nOrder no. ${o.orderNo}`;
+  if (o.qty) m += `\nThali: ${o.qty}${o.dishName ? ` · ${o.dishName}` : ""}`;
+  if (o.publicToken) m += `\nCounter par yeh QR dikhayein / Show this QR at the counter: ${SITE_URL}/order/success/${o.publicToken}`;
   if (invoiceUrl) m += `\nBill / Invoice: ${invoiceUrl}`;
   m += `\n– Grihasth Bhojnam by Sachin\nव्यापार नहीं, व्यवहार परोसते हैं हम।`;
   return m;
