@@ -39,7 +39,7 @@ export default async function MenuPage() {
       <h2 className="mt-10 text-lg font-bold text-earth-800">{t.menu.fixed}</h2>
       <div className="mt-4 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
         {dishes.map((d) => (
-          <article key={d.key} className="card overflow-hidden">
+          <article key={d.key} className="card-luxe overflow-hidden">
             <div className="relative aspect-[4/3]">
               {d.flip ? (
                 <FlipImage sizes={sizes} slides={[d.flip[0], d.flip[1]]} />
@@ -60,13 +60,13 @@ export default async function MenuPage() {
 
       <div className="mt-8"><IncludedItems lang={lang} t={t} /></div>
 
-      <div className="mt-8 flex flex-col items-center justify-between gap-4 rounded-2xl bg-saffron-500 p-6 text-white sm:flex-row">
-        <p className="text-lg font-bold">
+      <div className="mt-8 flex flex-col items-center justify-between gap-4 royal-bg rounded-3xl p-6 text-white shadow-luxe ring-1 ring-gold-400/30 sm:flex-row">
+        <p className="text-gold text-lg font-bold">
           {t.menu.thali} ₹{p.daily}
           {today.isPaneer && <> · {t.menu.paneerThali} ₹{p.paneer}</>}
           {" · "}{t.menu.monthly} ₹{p.monthly.toLocaleString("en-IN")}
         </p>
-        <Link href="/thali" className="btn bg-white text-saffron-700 hover:bg-saffron-50">{t.quick.cta}</Link>
+        <Link href="/thali" className="btn-gold">{t.quick.cta}</Link>
       </div>
     </div>
   );

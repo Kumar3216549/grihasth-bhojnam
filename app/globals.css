@@ -26,14 +26,21 @@ html[lang="hi"] h1, html[lang="hi"] h2, html[lang="hi"] h3 { font-family: "Mukta
 @layer components {
   .container-x { @apply mx-auto w-full max-w-6xl px-4 sm:px-6; }
   .btn { @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition focus:outline-none focus-visible:ring-4 disabled:cursor-not-allowed disabled:opacity-60; }
-  .btn-primary { @apply btn bg-saffron-500 text-white shadow-sm hover:bg-saffron-600 focus-visible:ring-saffron-200; }
+  .btn-primary { @apply btn bg-gradient-to-r from-saffron-500 via-saffron-400 to-gold-400 text-white shadow-gold hover:brightness-110 hover:-translate-y-0.5 focus-visible:ring-saffron-200; }
+  .btn-gold { @apply btn bg-gradient-to-r from-gold-300 via-gold-200 to-gold-400 text-royal-900 shadow-gold hover:brightness-105 hover:-translate-y-0.5 focus-visible:ring-gold-200; }
+  .btn-glass { @apply btn border border-white/25 bg-white/10 text-white backdrop-blur-md hover:bg-white/20 focus-visible:ring-white/30; }
   .btn-green { @apply btn bg-leaf-600 text-white hover:bg-leaf-700 focus-visible:ring-leaf-200; }
   .btn-ghost { @apply btn border border-saffron-200 bg-white text-saffron-800 hover:bg-saffron-50 focus-visible:ring-saffron-100; }
   .card { @apply rounded-2xl border border-earth-100 bg-white shadow-card; }
+  .card-luxe { @apply rounded-3xl border border-gold-200/60 bg-white shadow-card transition duration-300 hover:-translate-y-1 hover:shadow-luxe; }
+  .glass { @apply rounded-2xl border border-white/15 bg-white/10 backdrop-blur-xl; }
+  .text-gold { @apply bg-gradient-to-r from-gold-200 via-gold-300 to-gold-400 bg-clip-text text-transparent; }
+  .text-gold-deep { @apply bg-gradient-to-r from-gold-600 via-saffron-600 to-gold-500 bg-clip-text text-transparent; }
+  .eyebrow-gold { @apply text-xs font-bold uppercase tracking-[0.25em] text-gold-400; }
   .label { @apply mb-1.5 block text-sm font-semibold text-ink/80; }
   .input { @apply w-full rounded-xl border border-earth-200 bg-white px-3.5 py-2.5 text-base text-ink placeholder:text-ink/40 focus:border-saffron-400 focus:outline-none focus:ring-4 focus:ring-saffron-100; }
   .chip { @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold; }
-  .h-section { @apply text-2xl font-bold tracking-tight text-earth-800 sm:text-3xl; }
+  .h-section { @apply text-2xl font-bold tracking-tight text-royal-800 sm:text-4xl; }
   .eyebrow { @apply text-xs font-bold uppercase tracking-[0.18em] text-saffron-700; }
   /* admin */
   .a-card { @apply rounded-xl border border-stone-200 bg-white p-4 shadow-sm; }
@@ -43,6 +50,22 @@ html[lang="hi"] h1, html[lang="hi"] h2, html[lang="hi"] h3 { font-family: "Mukta
   .a-th { @apply px-3 py-2 text-left text-xs font-semibold uppercase tracking-wide text-stone-500; }
   .a-td { @apply px-3 py-2.5 text-sm; }
 }
+
+/* Royal night background with warm gold glows (hero, bands, footer) */
+.royal-bg {
+  background-color: #240B11;
+  background-image:
+    radial-gradient(900px 500px at 85% -10%, rgba(221,174,74,.22), transparent 60%),
+    radial-gradient(700px 500px at -10% 110%, rgba(242,140,40,.18), transparent 60%),
+    linear-gradient(160deg, #36121A 0%, #240B11 55%, #160609 100%);
+}
+/* Thin gold hairline */
+.gold-line { height: 1px; background: linear-gradient(90deg, transparent, #DDAE4A, transparent); }
+/* Gold frame around photos */
+.gold-frame { padding: 3px; border-radius: 2.2rem; background: linear-gradient(135deg, #F5DEA0, #C8932F 40%, #F5DEA0 60%, #A87522); }
+/* Edge fade for the dish ribbon */
+.fade-x { -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.marquee:hover { animation-play-state: paused; }
 
 /* Subtle rangoli dot grid */
 .tiffin-pattern {

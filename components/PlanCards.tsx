@@ -16,7 +16,7 @@ export default function PlanCards({ t, p, cutoff, whatsapp }: { t: Dict; p: P; c
     <div>
       <div className="grid gap-6 md:grid-cols-2">
         {/* Daily */}
-        <div className="card flex flex-col p-6 sm:p-8">
+        <div className="card-luxe flex flex-col p-6 sm:p-8">
           <span className="chip w-fit bg-saffron-50 text-saffron-800">☀️ {t.plans.daily}</span>
           <div className="mt-4 flex items-end gap-2">
             <span className="text-5xl font-extrabold tracking-tight text-ink">₹{p.daily}</span>
@@ -32,11 +32,11 @@ export default function PlanCards({ t, p, cutoff, whatsapp }: { t: Dict; p: P; c
         </div>
 
         {/* Monthly */}
-        <div className="relative flex flex-col overflow-hidden rounded-2xl bg-gradient-to-br from-saffron-500 to-saffron-600 p-6 text-white shadow-card sm:p-8">
-          <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white/10" />
-          <span className="chip w-fit bg-white/20 text-white">⭐ {t.plans.monthly}</span>
+        <div className="relative flex flex-col overflow-hidden royal-bg rounded-3xl p-6 text-white shadow-luxe ring-1 ring-gold-400/40 transition duration-300 hover:-translate-y-1 sm:p-8">
+          <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-gold-400/15 blur-2xl" />
+          <span className="chip w-fit bg-gradient-to-r from-gold-300 to-gold-500 text-royal-900">⭐ {t.plans.monthly}</span>
           <div className="mt-4 flex items-end gap-2">
-            <span className="text-5xl font-extrabold tracking-tight">₹{p.monthly.toLocaleString("en-IN")}</span>
+            <span className="text-gold text-5xl font-extrabold tracking-tight">₹{p.monthly.toLocaleString("en-IN")}</span>
             <span className="pb-1.5 text-sm text-white/80">{t.plans.perMonth}</span>
           </div>
           <p className="mt-2 text-sm text-white/90">{fmt(t.plans.monthlyDesc, vars)}</p>
@@ -44,12 +44,12 @@ export default function PlanCards({ t, p, cutoff, whatsapp }: { t: Dict; p: P; c
           <ul className="mt-6 flex-1 space-y-3 text-sm">
             {t.plans.features.monthly.map((f) => (
               <li key={f} className="flex gap-2.5">
-                <svg viewBox="0 0 20 20" className="mt-0.5 h-5 w-5 flex-none text-white" fill="currentColor" aria-hidden><path fillRule="evenodd" d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 1 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0z" clipRule="evenodd" /></svg>
+                <svg viewBox="0 0 20 20" className="mt-0.5 h-5 w-5 flex-none text-gold-300" fill="currentColor" aria-hidden><path fillRule="evenodd" d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 1 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0z" clipRule="evenodd" /></svg>
                 {fmt(f, vars)}
               </li>
             ))}
           </ul>
-          <Link href="/order?plan=MONTHLY" className="btn mt-8 w-full bg-white text-saffron-700 hover:bg-saffron-50">{t.plans.subscribe}</Link>
+          <Link href="/order?plan=MONTHLY" className="btn-gold mt-8 w-full">{t.plans.subscribe}</Link>
         </div>
       </div>
       <div className="mt-6 flex flex-col items-center justify-between gap-3 rounded-2xl border border-leaf-200 bg-leaf-50 p-5 sm:flex-row">
