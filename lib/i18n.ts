@@ -78,7 +78,7 @@ const en = {
   why: {
     title: "Why workers choose us",
     items: [
-      { t: "Cheaper than the canteen", d: "A filling ₹80 thali. The monthly plan works out even cheaper." },
+      { t: "Cheaper than the canteen", d: "A filling ₹87 thali. The monthly plan works out even cheaper." },
       { t: "Home-style taste", d: "Less oil, mild spices, no soda. Food you can eat every day." },
       { t: "Never late", d: "Delivered by your shift time. If we are late, tell us — your next tiffin is on us." },
       { t: "Clean kitchen", d: "Gloves, caps, RO water and daily cleaning. Visit our kitchen any time." },
@@ -373,7 +373,7 @@ const hi: Dict = {
   why: {
     title: "कर्मचारी हमें क्यों चुनते हैं",
     items: [
-      { t: "कैंटीन से सस्ता", d: "₹80 में भरपेट थाली। मासिक प्लान और भी सस्ता।" },
+      { t: "कैंटीन से सस्ता", d: "₹87 में भरपेट थाली। मासिक प्लान और भी सस्ता।" },
       { t: "घर जैसा स्वाद", d: "कम तेल, हल्का मसाला, सोडा नहीं। रोज़ खाने लायक खाना।" },
       { t: "कभी देर नहीं", d: "शिफ्ट के समय के हिसाब से डिलीवरी। देर हुई तो बताइए — अगला टिफ़िन हमारी तरफ़ से।" },
       { t: "साफ़ रसोई", d: "दस्ताने, टोपी, आरओ पानी और रोज़ सफ़ाई। कभी भी रसोई देखने आइए।" },

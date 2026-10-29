@@ -3,7 +3,7 @@
 > **व्यापार नहीं, व्यवहार परोसते हैं हम।** — *We don't serve business, we serve relationships.*
 
 Ghar jaisa tiffin service for factories, companies and workers in **Ahmedabad's industrial areas** — Odhav, Kathwada, Naroda, Vatva GIDC, Narol, Changodar.
-**₹80 daily thali · ₹2,100 monthly plan** — 4 tawa roti, rice, dal fry, mix veg / paneer sabji, salad.
+**₹87 daily thali · ₹2,080 monthly plan** — 4 tawa roti, rice, dal fry, mix veg / paneer sabji, salad.
 
 This repo is the full website + admin system:
 
@@ -11,7 +11,7 @@ This repo is the full website + admin system:
 |---|---|
 | `/` Hero with Hindi + English slogan, plans, photos | **Dashboard** — tiffins today, stock alerts, renewals, profit |
 | `/menu` Today's menu + week rotation | **Today's Orders** — factory-wise, status, cash received, WhatsApp |
-| `/plans` Daily ₹80 / Monthly ₹2100 with Subscribe | **Tiffin Calculator** — how many to cook, rotis, raw material, what-if |
+| `/plans` Daily ₹87 / Monthly ₹2080 with Subscribe | **Tiffin Calculator** — how many to cook, rotis, raw material, what-if |
 | `/order` Quick order: COD or Razorpay (UPI / card / netbanking) | **Monthly Subscribers** — expiry reminders, pause, extend, renew |
 | `/order/success/…` WhatsApp-style confirmation | **Inventory** — atta, rice, dal, sabji, oil… stock in/out, low-stock alert |
 | `/invoice/…` Auto invoice with logo (print / save as PDF) | **Delivery Routes** — per shift, Google Maps route, send to rider |

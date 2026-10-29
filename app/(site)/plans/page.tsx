@@ -7,8 +7,8 @@ import { IMAGES } from "@/lib/images";
 
 export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
-  title: "Plans — ₹80 Daily, ₹2100 Monthly Tiffin",
-  description: "Sasta monthly tiffin plan ₹2100 (26 days) and daily tiffin ₹80 for factory workers and office staff. Prepay by UPI or pre-book with cash on delivery.",
+  title: "Plans — ₹87 Daily, ₹2080 Monthly Tiffin",
+  description: "Sasta monthly tiffin plan ₹2080 (26 days) and daily tiffin ₹87 for factory workers and office staff. Prepay by UPI or pre-book with cash on delivery.",
   alternates: { canonical: "/plans" },
 };
 

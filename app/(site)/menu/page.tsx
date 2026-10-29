@@ -13,7 +13,7 @@ import WeeklyMenu from "@/components/WeeklyMenu";
 
 export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
-  title: "Today's Menu — Veg Thali ₹80",
+  title: "Today's Menu — Veg Thali ₹87",
   description: "Laziz weekly menu: aloo gobhi, mix veg, paneer butter masala, rajma, chhole, matar paneer with dal, 4 tawa roti, rice and salad. With 2 packets of mukhwas and 2 tissue papers.",
   alternates: { canonical: "/menu" },
 };
