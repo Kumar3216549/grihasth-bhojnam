@@ -17,5 +17,6 @@ export const IMAGES = {
   promoRice: "/photos/07_promo_rice.webp",
   promoPacking: "/photos/07_promo_packaging.webp", // hygienic disposable compartment box
   promoThali: "/photos/07_promo_thali.webp", // roti, rice, dal, paneer butter masala, salad
+  plansTiffin: "/photos/plans-tiffin-box.webp", // sealed tiffin box (owner's photo)
   thaliTop: u("1680359873864-43e89bf248ac"), // steel veg thali with rotis and katoris
 };

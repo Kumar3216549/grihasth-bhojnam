@@ -65,7 +65,7 @@ const en = {
       ["Can we order for the whole team?", "Yes. Enter the number of tiffins in the order form. Orders of 20 or more tiffins get the bulk rate."],
       ["How do I pay?", "Daily tiffin: prepay to our UPI, or pre-book and pay cash on delivery. Monthly plan: prepaid by UPI. Your order is confirmed after we verify the UPI payment."],
     ] as [string, string][],
-    imgAlt: "A steel thali with rotis, rice, dal and sabzi",
+    imgAlt: "Sealed tiffin box with tawa rotis, rice, paneer sabzi, dal and salad",
   },
   how: {
     title: "How it works",
@@ -360,7 +360,7 @@ const hi: Dict = {
       ["क्या पूरी टीम के लिए एक साथ ले सकते हैं?", "हाँ। ऑर्डर फ़ॉर्म में टिफ़िन की संख्या लिखें। 20 या ज़्यादा टिफ़िन पर थोक दाम मिलता है।"],
       ["भुगतान कैसे करें?", "दैनिक टिफ़िन: हमारे यूपीआई पर पहले भुगतान करें, या बुक करके डिलीवरी पर नकद दें। मासिक प्लान: यूपीआई से अग्रिम भुगतान। यूपीआई भुगतान की जाँच के बाद ऑर्डर पक्का होता है।"],
     ],
-    imgAlt: "स्टील की थाली में रोटी, चावल, दाल और सब्ज़ी",
+    imgAlt: "सील बंद टिफ़िन बॉक्स में तवा रोटी, चावल, पनीर सब्ज़ी, दाल और सलाद",
   },
   how: {
     title: "कैसे काम करता है",

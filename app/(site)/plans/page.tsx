@@ -19,13 +19,27 @@ export default async function PlansPage() {
   const faqs = t.plans.faqs;
   return (
     <div className="container-x py-10 sm:py-14">
-      <div className="grid items-center gap-8 lg:grid-cols-2">
-        <div>
-          <h1 className="text-3xl font-extrabold text-earth-800 sm:text-4xl">{t.plans.title}</h1>
-          <p className="mt-3 text-lg text-ink/70">{t.plans.sub}</p>
-        </div>
-        <div className="relative aspect-[16/9] overflow-hidden rounded-3xl">
-          <Image src={IMAGES.thaliTop} alt={t.plans.imgAlt} fill priority sizes="(min-width:1024px) 50vw, 100vw" className="object-cover" />
+      <div className="royal-bg relative overflow-hidden rounded-[2rem] p-6 shadow-luxe ring-1 ring-gold-400/30 sm:p-10">
+        <div className="mandala-bg pointer-events-none absolute -right-32 -top-32 h-96 w-96 animate-spinslow opacity-10" aria-hidden />
+        <div className="relative grid items-center gap-8 lg:grid-cols-[1fr_1.1fr]">
+          <div>
+            <p className="eyebrow-gold">✦ {t.nav.plans}</p>
+            <h1 className="text-gold mt-3 text-3xl font-extrabold leading-tight sm:text-5xl">{t.plans.title}</h1>
+            <div className="gold-line mt-5 max-w-xs" aria-hidden />
+            <p className="mt-5 text-lg text-white/75">{t.plans.sub}</p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <span className="glass px-4 py-2 text-sm font-semibold text-gold-100">{t.plans.daily} · ₹{p.daily}</span>
+              <span className="glass px-4 py-2 text-sm font-semibold text-gold-100">{t.plans.monthly} · ₹{p.monthly.toLocaleString("en-IN")}</span>
+            </div>
+          </div>
+          <div className="relative">
+            <div className="pointer-events-none absolute -inset-4 rounded-[2.5rem] bg-gold-400/20 blur-2xl" aria-hidden />
+            <div className="gold-frame relative">
+              <div className="relative aspect-[500/431] overflow-hidden rounded-[2rem]">
+                <Image src={IMAGES.plansTiffin} alt={t.plans.imgAlt} fill priority sizes="(min-width:1024px) 45vw, 100vw" className="object-cover" />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div className="mt-10"><PlanCards t={t} p={p} cutoff={s.orderCutoff} whatsapp={s.whatsappNumber} /></div>
