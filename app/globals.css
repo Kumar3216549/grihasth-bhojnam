@@ -67,6 +67,14 @@ html[lang="hi"] h1, html[lang="hi"] h2, html[lang="hi"] h3 { font-family: "Mukta
 .fade-x { -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
 .marquee:hover { animation-play-state: paused; }
 
+/* Tiffin slider "dazzle": gold light that follows the cursor + a shine sweep on each slide */
+.dazzle-glow { opacity: 0; transition: opacity .4s; mix-blend-mode: soft-light;
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(255,236,170,.75), rgba(221,174,74,.25) 35%, transparent 65%); }
+.dazzle:hover .dazzle-glow { opacity: 1; }
+.dazzle-sweep { background: linear-gradient(110deg, transparent 30%, rgba(255,240,190,.55) 48%, rgba(255,255,255,.75) 50%, rgba(255,240,190,.55) 52%, transparent 70%);
+  transform: translateX(-120%); animation: dazzle-sweep 1.3s .25s ease-out forwards; }
+@keyframes dazzle-sweep { to { transform: translateX(120%); } }
+
 /* Subtle rangoli dot grid */
 .tiffin-pattern {
   background-image: radial-gradient(circle at 1px 1px, rgba(242,140,40,.16) 1px, transparent 0);

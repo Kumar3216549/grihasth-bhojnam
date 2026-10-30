@@ -1,9 +1,10 @@
-import Image from "next/image";
 import type { Metadata } from "next";
 import PlanCards from "@/components/PlanCards";
 import { getDict } from "@/lib/lang";
 import { getSettings, prices } from "@/lib/settings";
-import { IMAGES } from "@/lib/images";
+import TiffinSlider, { type TiffinSlide } from "@/components/TiffinSlider";
+import { WEEKLY } from "@/lib/menu";
+import { todayDb, weekday } from "@/lib/dates";
 
 export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
@@ -17,6 +18,19 @@ export default async function PlansPage() {
   const s = await getSettings();
   const p = prices(s);
   const faqs = t.plans.faqs;
+  const todayWd = weekday(todayDb());
+  // One tiffin box photo per working day (Mon–Sat), matching the Laziz weekly menu
+  const slides: TiffinSlide[] = [1, 2, 3, 4, 5, 6].map((wd) => {
+    const dishes = WEEKLY[wd].dishes.map((d) => (lang === "hi" ? d.hi : d.en)).join(" + ");
+    return {
+      src: `/photos/plans/day-${wd}.webp`,
+      alt: `${t.plans.imgAlt} — ${dishes}`,
+      day: t.weekly.days[wd],
+      dishes,
+      badge: WEEKLY[wd].paneer ? t.menu.paneerThali : undefined,
+      today: wd === todayWd,
+    };
+  });
   return (
     <div className="container-x py-10 sm:py-14">
       <div className="royal-bg relative overflow-hidden rounded-[2rem] p-6 shadow-luxe ring-1 ring-gold-400/30 sm:p-10">
@@ -32,14 +46,11 @@ export default async function PlansPage() {
               <span className="glass px-4 py-2 text-sm font-semibold text-gold-100">{t.plans.monthly} · ₹{p.monthly.toLocaleString("en-IN")}</span>
             </div>
           </div>
-          <div className="relative">
-            <div className="pointer-events-none absolute -inset-4 rounded-[2.5rem] bg-gold-400/20 blur-2xl" aria-hidden />
-            <div className="gold-frame relative">
-              <div className="relative aspect-[500/431] overflow-hidden rounded-[2rem]">
-                <Image src={IMAGES.plansTiffin} alt={t.plans.imgAlt} fill priority sizes="(min-width:1024px) 45vw, 100vw" className="object-cover" />
-              </div>
-            </div>
-          </div>
+          <TiffinSlider
+            slides={slides}
+            start={todayWd === 0 ? 0 : todayWd - 1}
+            labels={{ prev: lang === "hi" ? "पिछला टिफ़िन" : "Previous tiffin", next: lang === "hi" ? "अगला टिफ़िन" : "Next tiffin", today: t.menu.today }}
+          />
         </div>
       </div>
       <div className="mt-10"><PlanCards t={t} p={p} cutoff={s.orderCutoff} whatsapp={s.whatsappNumber} /></div>
